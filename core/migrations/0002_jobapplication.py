@@ -6,18 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0001_initial'),
+        ("core", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='JobApplication',
+            name="JobApplication",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.URLField(max_length=500, unique=True)),
-                ('job_title', models.CharField(max_length=255)),
-                ('company_name', models.CharField(max_length=255)),
-                ('job_description', models.TextField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("url", models.URLField(max_length=500, unique=True)),
+                ("job_title", models.CharField(max_length=255)),
+                ("company_name", models.CharField(max_length=255)),
+                ("job_description", models.TextField()),
             ],
         ),
     ]

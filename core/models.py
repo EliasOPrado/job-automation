@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class LinkedInSession(models.Model):
     email = models.EmailField()  # Store the associated email to link session cookies
     cookies = models.JSONField()  # Store cookies as JSON
