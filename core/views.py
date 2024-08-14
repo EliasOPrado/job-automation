@@ -1,5 +1,5 @@
 # views.py
-
+import time
 from django.http import JsonResponse
 from django.views import View
 from .services.job_search_service import JobSearchService
@@ -19,6 +19,8 @@ class JobSearchView(View):
             # Instantiate the service with the necessary parameters
             job_search_service = JobSearchService(email=email, password=password, keyword=keyword)
             job_search_service.apply_to_jobs()
+            print("EVERYTHING WENT WELL -----")
+            time.sleep(10)
 
             # Return the applications collected
             return JsonResponse({'status': 'success', 'applications': job_search_service.applications})
