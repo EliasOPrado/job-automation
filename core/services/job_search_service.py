@@ -22,6 +22,15 @@ class UltilityMethods:
 
         return re.compile(r"<[^>]+>").sub("", html_content)
 
+    def find_dates_using_regex(lst):
+        # Define a regex pattern for dates in "Month Day, Year" format
+        date_pattern = re.compile(r"\b(?:\w{3,9} \d{1,2}, \d{4})\b")
+
+        for item in lst:
+            if date_pattern.search(item):
+                return True
+        return False
+
 
 class LinkedinJobSearchServiceAutomation:
     def __init__(self, email, password, keyword):
@@ -258,7 +267,7 @@ class DjangoJobsSearchAutomation:
         self.driver = uc.Chrome(options=self.options)
 
     def scrape_djangojobs(self):
-        sys.stdout.write("[INFORMATION] Initated DjangoJobs automation \n\n")
+        sys.stdout.write("[INFORMATION] Initated DjangoJobs automation \n")
         self.driver.get("https://djangojobs.net/jobs/")
 
         # get full page html
@@ -290,9 +299,12 @@ class DjangoJobsSearchAutomation:
             sys.stdout.write("[INFORMATION] Switched to job detail \n")
             check_for_date = self.driver.find_elements(By.CLASS_NAME, "float-right")
             dates = [date.text for date in check_for_date]
-            print(dates)
-            time.sleep(30)
+            is_date = UltilityMethods.find_dates_using_regex(dates)
+            if is_date:
+                """
+                TODO: Add a functionality to get the job title , url and the job description.
+                TODO: Save the job in the database.
+                """
+            time.sleep(10)
 
-            # Close the new tab and switch back to the original tab
-            self.driver.close()
         self.driver.switch_to.window(original_window)
