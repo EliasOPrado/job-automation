@@ -1,14 +1,16 @@
-# views.py
 import time
+import logging
 from django.http import JsonResponse
 from django.views import View
-from .services.job_search_service import JobSearchService
-import logging
+from .services.job_search_service import (
+    LinkedinJobSearchServiceAutomation,
+    DjangoJobsSearchAutomation,
+)
 
 logger = logging.getLogger(__name__)
 
 
-class JobSearchView(View):
+class LinkedinJobSearchView(View):
 
     def get(self, request, *args, **kwargs):
         """Handle GET requests"""
@@ -18,11 +20,10 @@ class JobSearchView(View):
 
         try:
             # Instantiate the service with the necessary parameters
-            job_search_service = JobSearchService(
+            job_search_service = LinkedinJobSearchServiceAutomation(
                 email=email, password=password, keyword=keyword
             )
             job_search_service.apply_to_jobs()
-            print("EVERYTHING WENT WELL -----")
             time.sleep(10)
 
             # Return the applications collected
@@ -33,3 +34,11 @@ class JobSearchView(View):
             logger.error(f"Error during job application process: {e}")
             input("PRES ANY BUTTON TO CLOSE THE DRIVER...")
             return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+
+class DjangoJobsSearchView(View):
+
+    def get(self, request, *args, **kwargs):
+        job_search_service = DjangoJobsSearchAutomation()
+        job_search_service.scrape_djangojobs()
+        return JsonResponse({"status": "success"})

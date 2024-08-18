@@ -1,10 +1,15 @@
 from django.urls import path
-from core.views import JobSearchView
+from core.views import LinkedinJobSearchView, DjangoJobsSearchView
 
 urlpatterns = [
     path(
         "linkedin-job-application-automation-job/",
-        JobSearchView.as_view(),
-        name="job-application",
+        LinkedinJobSearchView.as_view(),
+        name="linkedin-job-application",
+    ),
+    path(
+        "django-job-application-automation-job/",
+        DjangoJobsSearchView.as_view(),
+        name="django-job-application",
     ),
 ]

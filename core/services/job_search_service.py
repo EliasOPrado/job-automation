@@ -1,15 +1,16 @@
-import time
 import re
 import sys
+import time
+import logging
 from loguru import logger
 import undetected_chromedriver as uc
+from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.chrome.options import Options
-import logging
+from django.db.utils import IntegrityError
 from core.models import LinkedInSession, JobApplication
 
 logger = logging.getLogger(__name__)
@@ -22,7 +23,7 @@ class UltilityMethods:
         return re.compile(r"<[^>]+>").sub("", html_content)
 
 
-class JobSearchService:
+class LinkedinJobSearchServiceAutomation:
     def __init__(self, email, password, keyword):
         self.email = email
         self.password = password
@@ -246,3 +247,52 @@ class JobSearchService:
             # self.collect_job_info()
         finally:
             sys.stdout.write("Automation Ended. :rocket:")
+
+
+class DjangoJobsSearchAutomation:
+
+    def __init__(self):
+        self.options = uc.ChromeOptions()
+        self.options.add_argument("--disable-blink-features=AutomationControlled")
+        # self.options.add_argument('--headless')  # Run in headless mode for production
+        self.driver = uc.Chrome(options=self.options)
+
+    def scrape_djangojobs(self):
+        sys.stdout.write("[INFORMATION] Initated DjangoJobs automation \n\n")
+        self.driver.get("https://djangojobs.net/jobs/")
+
+        # get full page html
+        full_html = self.driver.page_source
+
+        # Parse the HTML with BeautifulSoup
+        soup = BeautifulSoup(full_html, "html.parser")
+
+        # Find all anchor tags with href attributes
+        all_links = soup.find_all("a", href=True)
+
+        # Filter out job-related URLs
+        job_urls = {link["href"] for link in all_links if "/jobs/" in link["href"]}
+
+        # Construct full URLs from relative paths
+        base_url = "https://djangojobs.net"
+        full_job_urls = [
+            base_url + url for url in job_urls if not url.startswith("http")
+        ]
+
+        # Optionally, add full URLs if relative URLs are already complete
+        full_job_urls.extend([url for url in job_urls if url.startswith("http")])
+
+        original_window = self.driver.current_window_handle
+        for link in full_job_urls:
+            # Open a new tab and switch to it
+            self.driver.switch_to.new_window("tab")
+            self.driver.get(link)
+            sys.stdout.write("[INFORMATION] Switched to job detail \n")
+            check_for_date = self.driver.find_elements(By.CLASS_NAME, "float-right")
+            dates = [date.text for date in check_for_date]
+            print(dates)
+            time.sleep(30)
+
+            # Close the new tab and switch back to the original tab
+            self.driver.close()
+        self.driver.switch_to.window(original_window)
