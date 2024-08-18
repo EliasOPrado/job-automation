@@ -1,7 +1,6 @@
 import re
 import sys
 import time
-import logging
 from loguru import logger
 import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
@@ -12,8 +11,6 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from django.db.utils import IntegrityError
 from core.models import LinkedInSession, JobApplication
-
-logger = logging.getLogger(__name__)
 
 
 class UltilityMethods:
@@ -60,7 +57,7 @@ class LinkedinJobSearchServiceAutomation:
                 self.driver.add_cookie(cookie)
             logger.info("Cookies loaded successfully from the database")
         except LinkedInSession.DoesNotExist:
-            logger.info("No cookies found in the database for this email")
+            sys.stdout.write("No cookies found in the database for this email\n")
 
     def login_linkedin(self):
         """Login to LinkedIn or reuse saved session"""
@@ -76,12 +73,12 @@ class LinkedinJobSearchServiceAutomation:
         # Check if redirected to the LinkedIn feed, indicating an active session
         current_url = self.driver.current_url
         if "feed" in current_url or "jobs" in current_url:
-            sys.stdout.write("Logged in using saved session \n\n")
+            sys.stdout.write("[INFORMATION] Logged in using saved session \n")
             return  # Stop further execution of login flow if already logged in
 
         # If not redirected, proceed with the login process
         sys.stdout.write(
-            "Session not found or expired, logging in with credentials \n\n"
+            "[INFORMATION] Session not found or expired, logging in with credentials \n"
         )
         self.driver.get("https://www.linkedin.com/login")
         login_email = self.driver.find_element(By.ID, "username")
@@ -110,7 +107,7 @@ class LinkedinJobSearchServiceAutomation:
             keyword_search_box.send_keys(self.keyword)
             keyword_search_box.send_keys(Keys.RETURN)
         except NoSuchElementException as e:
-            sys.stdout.write(f"Error finding the search box: {e} \n\n")
+            sys.stdout.write(f"[ERROR] Error finding the search box: {e} \n")
             raise
 
     def apply_filters(self):
@@ -140,7 +137,7 @@ class LinkedinJobSearchServiceAutomation:
                     self.collect_job_info()
 
         except NoSuchElementException as e:
-            sys.stdout.write(f"Error applying filters: {e} \n\n")
+            sys.stdout.write(f"[ERROR] Error applying filters: {e} \n")
             raise
 
     def collect_job_info(self):
@@ -172,7 +169,7 @@ class LinkedinJobSearchServiceAutomation:
                     )
                 )
             except NoSuchElementException:
-                sys.stdout.write("Apply button not found, skipping job\n\n")
+                sys.stdout.write("[INFORMATION] Apply button not found, skipping job\n")
                 return
 
             # Click the apply button
@@ -186,7 +183,9 @@ class LinkedinJobSearchServiceAutomation:
             job_url = self.driver.current_url
 
             # Log the job processing
-            sys.stdout.write(f"Processing job: {job_title} at {job_url}\n")
+            sys.stdout.write(
+                f"[INFORMATION] Processing job: {job_title} at {job_url}\n"
+            )
 
             # Find company name element
             try:
@@ -196,13 +195,13 @@ class LinkedinJobSearchServiceAutomation:
                 company_name = company_name_span.text.strip()
             except NoSuchElementException:
                 sys.stdout.write(
-                    "Company name not found, using default value 'Unknown Company'.\n"
+                    "[ERROR] Company name not found, using default value 'Unknown Company'.\n"
                 )
                 company_name = "Unknown Company"
 
             # Check if the job with this URL already exists
             try:
-                job_application, created = JobApplication.objects.update_or_create(
+                _, created = JobApplication.objects.update_or_create(
                     url=job_url,
                     defaults={
                         "job_title": job_title,
@@ -213,15 +212,17 @@ class LinkedinJobSearchServiceAutomation:
                     },
                 )
                 if created:
-                    sys.stdout.write("Added a new job application to the database.\n")
+                    sys.stdout.write(
+                        "[INFORMATION] Added a new job application to the database.\n"
+                    )
                 else:
                     sys.stdout.write(
-                        "Updated the existing job application in the database.\n"
+                        "[INFORMATION] Updated the existing job application in the database.\n"
                     )
 
             except IntegrityError as e:
                 sys.stdout.write(
-                    f"An integrity error occurred: {str(e)}, skipping job.\n"
+                    f"[ERROR] An integrity error occurred: {str(e)}, skipping job.\n"
                 )
 
             # Sleep to avoid being too fast
@@ -232,21 +233,25 @@ class LinkedinJobSearchServiceAutomation:
             self.driver.close()
             self.driver.switch_to.window(old_tab)
 
-            sys.stdout.write(f"Successfully applied to job: {job_title}\n")
+            sys.stdout.write(
+                f"[INFORMATION] Successfully applied to job: {job_title}\n"
+            )
 
         except NoSuchElementException as e:
-            sys.stdout.write(f"An element was not found: {str(e)}, skipping job.\n")
+            sys.stdout.write(
+                f"[ERROR] An element was not found: {str(e)}, skipping job.\n"
+            )
 
     def close_session(self):
         """Close the browser session"""
         self.driver.quit()
-        sys.stdout.write("Browser session closed.\n\n")
+        sys.stdout.write("[INFORMATION] Browser session closed.\n\n")
 
     def apply_to_jobs(self):
         """Apply to job offers"""
         try:
             self.driver.maximize_window()
-            sys.stdout.write("***** Initialized automation ***** \n")
+            sys.stdout.write("[INFORMATION] Initialized automation\n")
             self.login_linkedin()
             time.sleep(5)
             self.search_jobs()
@@ -255,7 +260,7 @@ class LinkedinJobSearchServiceAutomation:
             time.sleep(3)
             # self.collect_job_info()
         finally:
-            sys.stdout.write("Automation Ended. :rocket:")
+            sys.stdout.write("[INFORMATION] Automation Ended. :rocket:")
 
 
 class DjangoJobsSearchAutomation:
@@ -296,15 +301,60 @@ class DjangoJobsSearchAutomation:
             # Open a new tab and switch to it
             self.driver.switch_to.new_window("tab")
             self.driver.get(link)
-            sys.stdout.write("[INFORMATION] Switched to job detail \n")
+            sys.stdout.write("[INFORMATION] Switched to job detail in a new tab \n")
             check_for_date = self.driver.find_elements(By.CLASS_NAME, "float-right")
             dates = [date.text for date in check_for_date]
             is_date = UltilityMethods.find_dates_using_regex(dates)
             if is_date:
                 """
-                TODO: Add a functionality to get the job title , url and the job description.
-                TODO: Save the job in the database.
+                TODO: Check if all the links of the current pagination is fully iterated then click on the next page to scrape.
+                TODO: Fix error that happens when there is no values or the html does not exist: Here --> company_name_element = job_title_element.find('strong')
                 """
-            time.sleep(10)
+                sys.stdout.write("[INFORMATION] Scrapping the page\n")
+                        # get full page html
+                full_html = self.driver.page_source
 
-        self.driver.switch_to.window(original_window)
+                # Parse the HTML with BeautifulSoup
+                soup = BeautifulSoup(full_html, "html.parser")
+
+                # Extract Job Title
+                job_title_element = soup.find('h2')
+                job_title = job_title_element.get_text(strip=True) if job_title_element else 'Not found'
+
+                # Extract Company Name
+                company_name_element = job_title_element.find('strong')
+                company_name = company_name_element.get_text(strip=True) if company_name_element else 'Not found'
+
+                # Extract Job Description
+                job_description_elements = soup.find_all('p')
+                job_description_html = ' '.join([str(p) for p in job_description_elements if p.get_text(strip=True)])
+                job_description = UltilityMethods.remove_html_tags(job_description_html)
+                try:
+                    _, created = JobApplication.objects.update_or_create(
+                        url=link,
+                        defaults={
+                            "job_title": job_title,
+                            "company_name": company_name,
+                            "job_description": job_description,
+                        },
+                    )
+                    if created:
+                        sys.stdout.write(
+                            "[INFORMATION] Added a new job application to the database.\n"
+                        )
+                    else:
+                        sys.stdout.write(
+                            "[INFORMATION] Updated the existing job application in the database.\n"
+                        )
+
+                except IntegrityError as e:
+                    sys.stdout.write(
+                        f"[ERROR] An integrity error occurred: {str(e)}, skipping job.\n"
+                    )
+
+            else:
+                sys.stdout.write("[INFORMATION] No job information to scrape\n")
+            time.sleep(30)
+            sys.stdout.write("[INFORMATION] Closing the tab\n")
+            self.driver.close()
+            self.driver.switch_to.window(original_window)
