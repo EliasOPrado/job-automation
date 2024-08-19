@@ -262,12 +262,13 @@ class LinkedinJobSearchServiceAutomation:
         finally:
             sys.stdout.write("[INFORMATION] Automation Ended. :rocket:")
 
+
 class DjangoJobsSearchAutomation:
 
     def __init__(self):
         self.options = uc.ChromeOptions()
         self.options.add_argument("--disable-blink-features=AutomationControlled")
-        self.options.add_argument('--headless')  # Run in headless mode for production
+        self.options.add_argument("--headless")  
         self.driver = uc.Chrome(options=self.options)
 
     def scrape_djangojobs(self):
@@ -290,10 +291,16 @@ class DjangoJobsSearchAutomation:
             all_links = soup.find_all("a", href=True)
 
             # Filter out job-related URLs and exclude unwanted URLs
-            job_urls = {link["href"] for link in all_links if "/jobs/" in link["href"] and "rss" not in link["href"]}
+            job_urls = {
+                link["href"]
+                for link in all_links
+                if "/jobs/" in link["href"] and "rss" not in link["href"]
+            }
 
             if not job_urls:
-                sys.stdout.write("[INFORMATION] No more job URLs found, exiting pagination loop.\n")
+                sys.stdout.write(
+                    "[INFORMATION] No more job URLs found, exiting pagination loop.\n"
+                )
                 break  # Exit the loop if no job URLs are found
 
             # Construct full URLs correctly
@@ -307,13 +314,13 @@ class DjangoJobsSearchAutomation:
                 self.driver.switch_to.new_window("tab")
                 self.driver.get(link)
                 sys.stdout.write("[INFORMATION] Switched to job detail in a new tab \n")
-                
+
                 check_for_date = self.driver.find_elements(By.CLASS_NAME, "float-right")
                 dates = [date.text for date in check_for_date]
                 is_date = UltilityMethods.find_dates_using_regex(dates)
                 if is_date:
                     sys.stdout.write("[INFORMATION] Scrapping the page\n")
-                    
+
                     # get full page html
                     full_html = self.driver.page_source
 
@@ -321,20 +328,32 @@ class DjangoJobsSearchAutomation:
                     soup = BeautifulSoup(full_html, "html.parser")
 
                     # Extract Job Title
-                    job_title_element = soup.find('h2')
-                    job_title = job_title_element.get_text(strip=True) if job_title_element else 'Not found'
+                    job_title_element = soup.find("h2")
+                    job_title = (
+                        job_title_element.get_text(strip=True)
+                        if job_title_element
+                        else "Not found"
+                    )
 
                     # Extract Company Name
-                    company_name = 'Not found'
+                    company_name = "Not found"
                     if job_title_element:
-                        company_name_element = job_title_element.find('strong')
+                        company_name_element = job_title_element.find("strong")
                         if company_name_element:
                             company_name = company_name_element.get_text(strip=True)
 
                     # Extract Job Description
-                    job_description_elements = soup.find_all('p')
-                    job_description_html = ' '.join([str(p) for p in job_description_elements if p.get_text(strip=True)])
-                    job_description = UltilityMethods.remove_html_tags(job_description_html)
+                    job_description_elements = soup.find_all("p")
+                    job_description_html = " ".join(
+                        [
+                            str(p)
+                            for p in job_description_elements
+                            if p.get_text(strip=True)
+                        ]
+                    )
+                    job_description = UltilityMethods.remove_html_tags(
+                        job_description_html
+                    )
 
                     try:
                         _, created = JobApplication.objects.update_or_create(
