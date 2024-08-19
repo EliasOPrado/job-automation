@@ -262,99 +262,111 @@ class LinkedinJobSearchServiceAutomation:
         finally:
             sys.stdout.write("[INFORMATION] Automation Ended. :rocket:")
 
-
 class DjangoJobsSearchAutomation:
 
     def __init__(self):
         self.options = uc.ChromeOptions()
         self.options.add_argument("--disable-blink-features=AutomationControlled")
-        # self.options.add_argument('--headless')  # Run in headless mode for production
+        self.options.add_argument('--headless')  # Run in headless mode for production
         self.driver = uc.Chrome(options=self.options)
 
     def scrape_djangojobs(self):
-        sys.stdout.write("[INFORMATION] Initated DjangoJobs automation \n")
-        self.driver.get("https://djangojobs.net/jobs/")
+        sys.stdout.write("[INFORMATION] Initiated DjangoJobs automation \n")
 
-        # get full page html
-        full_html = self.driver.page_source
-
-        # Parse the HTML with BeautifulSoup
-        soup = BeautifulSoup(full_html, "html.parser")
-
-        # Find all anchor tags with href attributes
-        all_links = soup.find_all("a", href=True)
-
-        # Filter out job-related URLs
-        job_urls = {link["href"] for link in all_links if "/jobs/" in link["href"]}
-
-        # Construct full URLs from relative paths
+        page_number = 1
         base_url = "https://djangojobs.net"
-        full_job_urls = [
-            base_url + url for url in job_urls if not url.startswith("http")
-        ]
 
-        # Optionally, add full URLs if relative URLs are already complete
-        full_job_urls.extend([url for url in job_urls if url.startswith("http")])
+        while True:
+            url = f"{base_url}/jobs/?page={page_number}"
+            self.driver.get(url)
 
-        original_window = self.driver.current_window_handle
-        for link in full_job_urls:
-            # Open a new tab and switch to it
-            self.driver.switch_to.new_window("tab")
-            self.driver.get(link)
-            sys.stdout.write("[INFORMATION] Switched to job detail in a new tab \n")
-            check_for_date = self.driver.find_elements(By.CLASS_NAME, "float-right")
-            dates = [date.text for date in check_for_date]
-            is_date = UltilityMethods.find_dates_using_regex(dates)
-            if is_date:
-                """
-                TODO: Check if all the links of the current pagination is fully iterated then click on the next page to scrape.
-                TODO: Fix error that happens when there is no values or the html does not exist: Here --> company_name_element = job_title_element.find('strong')
-                """
-                sys.stdout.write("[INFORMATION] Scrapping the page\n")
-                        # get full page html
-                full_html = self.driver.page_source
+            # get full page html
+            full_html = self.driver.page_source
 
-                # Parse the HTML with BeautifulSoup
-                soup = BeautifulSoup(full_html, "html.parser")
+            # Parse the HTML with BeautifulSoup
+            soup = BeautifulSoup(full_html, "html.parser")
 
-                # Extract Job Title
-                job_title_element = soup.find('h2')
-                job_title = job_title_element.get_text(strip=True) if job_title_element else 'Not found'
+            # Find all anchor tags with href attributes
+            all_links = soup.find_all("a", href=True)
 
-                # Extract Company Name
-                company_name_element = job_title_element.find('strong')
-                company_name = company_name_element.get_text(strip=True) if company_name_element else 'Not found'
+            # Filter out job-related URLs and exclude unwanted URLs
+            job_urls = {link["href"] for link in all_links if "/jobs/" in link["href"] and "rss" not in link["href"]}
 
-                # Extract Job Description
-                job_description_elements = soup.find_all('p')
-                job_description_html = ' '.join([str(p) for p in job_description_elements if p.get_text(strip=True)])
-                job_description = UltilityMethods.remove_html_tags(job_description_html)
-                try:
-                    _, created = JobApplication.objects.update_or_create(
-                        url=link,
-                        defaults={
-                            "job_title": job_title,
-                            "company_name": company_name,
-                            "job_description": job_description,
-                        },
-                    )
-                    if created:
-                        sys.stdout.write(
-                            "[INFORMATION] Added a new job application to the database.\n"
+            if not job_urls:
+                sys.stdout.write("[INFORMATION] No more job URLs found, exiting pagination loop.\n")
+                break  # Exit the loop if no job URLs are found
+
+            # Construct full URLs correctly
+            full_job_urls = [
+                base_url + url if url.startswith("/") else url for url in job_urls
+            ]
+
+            original_window = self.driver.current_window_handle
+            for link in full_job_urls:
+                # Open a new tab and switch to it
+                self.driver.switch_to.new_window("tab")
+                self.driver.get(link)
+                sys.stdout.write("[INFORMATION] Switched to job detail in a new tab \n")
+                
+                check_for_date = self.driver.find_elements(By.CLASS_NAME, "float-right")
+                dates = [date.text for date in check_for_date]
+                is_date = UltilityMethods.find_dates_using_regex(dates)
+                if is_date:
+                    sys.stdout.write("[INFORMATION] Scrapping the page\n")
+                    
+                    # get full page html
+                    full_html = self.driver.page_source
+
+                    # Parse the HTML with BeautifulSoup
+                    soup = BeautifulSoup(full_html, "html.parser")
+
+                    # Extract Job Title
+                    job_title_element = soup.find('h2')
+                    job_title = job_title_element.get_text(strip=True) if job_title_element else 'Not found'
+
+                    # Extract Company Name
+                    company_name = 'Not found'
+                    if job_title_element:
+                        company_name_element = job_title_element.find('strong')
+                        if company_name_element:
+                            company_name = company_name_element.get_text(strip=True)
+
+                    # Extract Job Description
+                    job_description_elements = soup.find_all('p')
+                    job_description_html = ' '.join([str(p) for p in job_description_elements if p.get_text(strip=True)])
+                    job_description = UltilityMethods.remove_html_tags(job_description_html)
+
+                    try:
+                        _, created = JobApplication.objects.update_or_create(
+                            url=link,
+                            defaults={
+                                "job_title": job_title,
+                                "company_name": company_name,
+                                "job_description": job_description,
+                            },
                         )
-                    else:
+                        if created:
+                            sys.stdout.write(
+                                "[INFORMATION] Added a new job application to the database.\n"
+                            )
+                        else:
+                            sys.stdout.write(
+                                "[INFORMATION] Updated the existing job application in the database.\n"
+                            )
+
+                    except IntegrityError as e:
                         sys.stdout.write(
-                            "[INFORMATION] Updated the existing job application in the database.\n"
+                            f"[ERROR] An integrity error occurred: {str(e)}, skipping job.\n"
                         )
 
-                except IntegrityError as e:
-                    sys.stdout.write(
-                        f"[ERROR] An integrity error occurred: {str(e)}, skipping job.\n"
-                    )
+                else:
+                    sys.stdout.write("[INFORMATION] No job information to scrape\n")
 
-            else:
-                sys.stdout.write("[INFORMATION] No job information to scrape\n")
-            time.sleep(30)
-            sys.stdout.write("[INFORMATION] Closing the tab\n")
-            self.driver.close()
-            self.driver.switch_to.window(original_window)
+                time.sleep(5)
+                sys.stdout.write("[INFORMATION] Closing the tab\n")
+                self.driver.close()
+                self.driver.switch_to.window(original_window)
+
+            # Increment the page number for the next iteration
+            page_number += 1
+            sys.stdout.write(f"[INFORMATION] Moving to the next page: {page_number}.\n")
