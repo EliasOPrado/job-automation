@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Add this to include padding in the width */
+  box-sizing: border-box; 
   font-family: Roboto, sans-serif;
 }
 
@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 1440px;
   padding-left: 100px;
   padding-right: 100px;
 }
@@ -32,8 +33,9 @@ button.main-button {
   align-items: center;
   align-items: center;
   justify-content: space-between;
-  height: 85px;
+  height: 45px;
   width: 100%;
+  max-width: 1440px;
   margin-top: 20px;
 }
 
@@ -62,11 +64,6 @@ button.main-button {
   width: 365px;
 }
 
-.text {
-  font-size: 20px;
-  font-weight: bold;
-}
-
 button.button {
   height: 40px;
   width: 140px;
@@ -78,7 +75,7 @@ button.button {
   letter-spacing: 1px;
 }
 
-/*first section ========================================*/
+/* First section ========================================*/
 .component-texture {
   width: 285px;
   height: 248px;
@@ -88,14 +85,11 @@ button.button {
 
 .first-section {
   display: flex;
-  width: 100%;
-  /* place-items: center; */
+  max-height: 77vh;
 }
 
 .left-container {
   width: 50%;
-  display: flex;
-  flex-direction: column;
   padding-top: 50px;
 }
 
@@ -104,10 +98,21 @@ button.button {
   font-size:50px;
 }
 
+.title {
+  font-weight: 800;
+  font-size:40px;
+}
+
 .sub-title {
   margin-top: 25px;
-  font-weight: 500;
+  font-weight: 700;
   font-size:25px;
+  color: #808080;
+}
+
+.text {
+  font-weight: 300;
+  font-size:20x;
   color: #808080;
 }
 .left-container ul{
@@ -128,14 +133,15 @@ button.button {
   top: 0;
   left: 0;
   width: 50%;
+  padding-left: 100px;
 }
 
 img.rectangle {
   position: relative;
-  top: -593px;
-  left: 61px;
-  width: 400px;
-  height: 337px;
+  top: -632px;
+  left: 40px;
+  width: 405px;
+  height: 376px;
   z-index: -3;
 }
 
@@ -149,7 +155,7 @@ img.middle-texture {
 img.man {
   position: relative;
   left: 25px;
-  width: 419px;
+  width: 450px;
 }
 
 .position-container-one {
@@ -189,3 +195,76 @@ img.man {
   width: 20px;
 }
 /* Add media query --------- */
+/* Second section ========================================*/
+.second-section {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+}
+
+.top-sub-section {
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottom-sub-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin-top: 70px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  height: 280px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: #cecece;
+}
+
+img.section-icon {
+  margin-bottom: 10px;
+}
+
+p.text.alignment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Third section ========================================*/
+.third-section {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  margin-top: 80px;
+}
+
+img.woman {
+  position: relative;
+  left: -79px;
+  width: 650px;
+}
+
+img.second-middle-texture {
+  position: relative;
+  top: -412px;
+  left: 45px;
+  z-index: -2;
+}
+
+img.second-rectangle {
+  position: relative;
+  top: -632px;
+  left: 40px;
+  width: 460px;
+  height: 376px;
+  z-index: -3;
+}

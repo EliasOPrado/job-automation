@@ -3,57 +3,97 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <link href="{% static 'css/home/home_page.css' %}" rel="stylesheet">
-    <title>Job.remote</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="{% static 'css/home/home_page.css' %}" rel="stylesheet">
+  <title>Job.remote</title>
 </head>
+
 <body>
-      <div class="landing-page-container">
-        <div class="header">
-          <div class="logo">
-            <p class="pro">Pro</p>
-            <p class="dot">.</p>
-            <p class="remote">remote</p>
-          </div>
-          <div class="right-header-inner-container">
-            <p class="text">About</p>
-            <p class="text">Sign In</p>
-            <button class="button">Sign Up Now</button>
-          </div>
-        </div>
-        <div class="first-section">
-          <div class="left-container">
-            <p class="main-title">Find the Best Remote <br/> Jobs Overseas Fast</p>
-            <p class="sub-title">The only platform you need to accesllerate your applications to companies in different parts of the world 🌎</p>
-            <ul>
-              <li>Easy Subscription</li>
-              <li>Quick Apllication</li>
-              <li>Everything Free</li>
-            </ul>
-            <button class="main-button">Sign Up Now</button>
-          </div>
-          <div class="right-container">
-              <img class="man" src="{% static 'images/man.png' %}" />
-              <img class="middle-texture" src="{% static 'images/texture.svg' %}" />
-              <img class="rectangle" src="{% static 'images/rectangle-33.svg' %}" />
-              <div class="position-container-one">
-                <img src="{% static 'images/check-circle-24px-blue.svg' %}" class="check-circle">
-                <p class="text-wrapper">Java Developer</p>
-              </div>
-            <div class="position-container-two">
-                <img src="{% static 'images/check-circle-24px-blue.svg' %}" class="check-circle">
-                <p class="text-wrapper">Front end React</p>
-              </div> 
-            </div>
-          </div>
-        </div>
-        <!--landing-page-container (end)-->>
+  <div class="landing-page-container">
+    <div class="header">
+      <div class="logo">
+        <p class="pro">Pro</p>
+        <p class="dot">.</p>
+        <p class="remote">remote</p>
       </div>
-      
-    </body>
-  </html>
+      <div class="right-header-inner-container">
+        <p class="text">About</p>
+        <p class="text">Sign In</p>
+        <button class="button">Sign Up Now</button>
+      </div>
+    </div>
+    <div class="first-section">
+      <div class="left-container">
+        <p class="main-title">Find the Best Remote <br /> Jobs Overseas Fast</p>
+        <p class="sub-title">The only platform you need to accesllerate your applications to companies in different
+          parts of the world 🌎</p>
+        <ul>
+          <li>Easy Subscription</li>
+          <li>Quick Apllication</li>
+          <li>Everything Free</li>
+        </ul>
+        <button class="main-button">Sign Up Now</button>
+      </div>
+      <div class="right-container">
+        <img class="man" src="{% static 'images/man.png' %}" />
+        <img class="middle-texture" src="{% static 'images/texture.svg' %}" />
+        <img class="rectangle" src="{% static 'images/rectangle-33.svg' %}" />
+        <div class="position-container-one">
+          <img src="{% static 'images/check-circle-24px-blue.svg' %}" class="check-circle">
+          <p class="text-wrapper">Java Developer</p>
+        </div>
+        <div class="position-container-two">
+          <img src="{% static 'images/check-circle-24px-blue.svg' %}" class="check-circle">
+          <p class="text-wrapper">Front end React</p>
+        </div>
+      </div>
+    </div>
+    <div class="second-section">
+      <div class="top-sub-section">
+        <p class="title">Only Three <br/>Steps to Start Apllying</p>
+        <p class="sub-title">Follow all the steps then start <br/>applying without costs</p>
+      </div>
+      <div class="bottom-sub-section">
+        <div class="card">
+          <img class="section-icon" src="{% static 'images/face-unlock-24px.svg' %}" alt="">
+          <p class="text">Create your account</p>
+        </div>
+        <div class="section">
+          <img src="{% static 'images/arrow-forward-24px.svg' %}" alt="">
+        </div>
+        <div class="card">
+          <img class="section-icon" src="{% static 'images/work-24px.svg' %}" alt="">
+          <p class="text">Access the job posts</p>
+        </div>
+        <div class="section">
+          <img src="{% static 'images/arrow-forward-24px.svg' %}" alt="">
+        </div>
+        <div class="card">
+          <img class="section-icon" src="{% static 'images/check-circle-outline-24px.svg' %}" alt="">
+          <p class="text alignment">Apply directly on the <br /> company’s platform</p>
+        </div>
+      </div>
+    </div>
+    <div class="third-section">
+      <div class="left-container">
+        <img class="woman" src="{% static 'images/woman.png' %}" />
+        <img class="second-middle-texture" src="{% static 'images/texture.svg' %}" />
+        <img class="second-rectangle" src="{% static 'images/rectangle-39.svg' %}" />
+      </div>
+      <div class="right-container">
+
+      </div>
+    </div>
+  </div>
+  <!--landing-page-container (end)-->>
+  </div>
+
+</body>
+
+</html>
