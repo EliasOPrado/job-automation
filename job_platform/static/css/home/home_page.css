@@ -244,6 +244,7 @@ p.text.alignment {
   display: flex;
   max-height: 100vh;
   margin-top: 80px;
+  max-height: 90vh;
 }
 
 img.woman {
@@ -284,4 +285,45 @@ img.second-rectangle {
   height: 30px;
   width: 30px;
   margin-right: 20px;
+}
+
+/* Fourth section ========================================*/
+.fourth-section {
+  display: flex;
+  max-height: 100vh;
+}
+
+.woman-2 {
+  position: relative;
+  left: -119px;
+  width: 650px;
+}
+
+.third-middle-texture {
+  position: relative;
+  top: -433px;
+  left: 104px;
+  z-index: -2;
+}
+
+.third-rectangle {
+  position: relative;
+  top: -632px;
+  left: 40px;
+  width: 460px;
+  height: 376px;
+  z-index: -3;
+}
+
+.fourth-section.left-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.fourth-section p.text {
+  margin-top: 40px;
+}
+
+.fourth-section button.main-button {
+  margin-top: 50px;
 }
