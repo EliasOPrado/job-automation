@@ -1,20 +1,24 @@
-* {
-  margin: 0;
+html, body {
+  padding: 100px 0 100px 0;
   padding: 0;
   box-sizing: border-box; 
-  font-family: Roboto, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
-html {
-  position: relative;
-}
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+}
 
 .landing-page-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1519px;
+  max-width: 1100px;
   height: 100%;
   padding-left: 100px;
   padding-right: 100px;
@@ -48,7 +52,6 @@ button.main-button {
 .logo{
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .pro, .remote, .dot {
@@ -58,10 +61,12 @@ button.main-button {
 }
 
 .dot {
-  font-size: 60px;
+  font-size: 60px; 
   color: #6366F1;
-  margin-bottom: 22px;
+  margin-bottom: 0; 
+  transform: translateY(-41px); 
 }
+
 
 .right-header-inner-container{
   display: flex;
@@ -91,22 +96,25 @@ button.button {
 
 .first-section {
   display: flex;
-  max-height: 77vh;
 }
 
-.left-container {
+.left-container.two {
+  position: relative;
+  top: 26px;
+  left: -38px;
   width: 50%;
   padding-top: 50px;
 }
 
 .main-title {
   font-weight: 900;
-  font-size:50px;
+  font-size:45px;
 }
 
 .title {
   font-weight: 800;
   font-size:40px;
+  margin: 0;
 }
 
 .sub-title {
@@ -121,13 +129,8 @@ button.button {
   font-size:20px;
   color: #808080;
 }
-.left-container ul{
-  margin-top: 20px;
-  margin-left: 25px;
-}
 
 .left-container ul li {
-  margin-top: 5px;
   font-weight: 500;
   font-size:22px;
   color: #808080;
@@ -139,35 +142,39 @@ button.button {
   top: 0;
   left: 0;
   width: 50%;
-  padding-left: 100px;
+}
+
+.right-container.one {
+  top: -79px;
 }
 
 img.rectangle {
   position: relative;
-  top: -632px;
-  left: 40px;
-  width: 405px;
-  height: 376px;
+  top: -645px;
+  left: 96px;
+  width: 379px;
+  height: 680px;
   z-index: -3;
 }
 
 img.middle-texture {
   position: relative;
-  top: -412px;
-  left: 181px;
+  top: -318px;
+  left: 216px;
   z-index: -2;
 }
 
 img.man {
   position: relative;
   left: 25px;
+  top: 143px;
   width: 450px;
 }
 
 .position-container-one {
   position: absolute;
-  top: 327px;
-  left: 0px;
+  top: 408px;
+  left: 49px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -176,14 +183,15 @@ img.man {
   border-color: #cecece;
   border-width: 2px;
   border-radius: 10px;
-  width: 158px;
-  height: 34px;
+  width: 196px;
+  height: 45px;
+  padding: 5px;
 }
 
 .position-container-two {
   position: absolute;
-  top: 386px;
-  left: 31px;
+  top: 496px;
+  left: 87px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -192,9 +200,15 @@ img.man {
   border-color: #cecece;
   border-width: 2px;
   border-radius: 10px;
-  width: 162px;
-  height: 34px;
+  width: 296px;
+  height: 45px;
+  padding: 5px;
 }
+
+.text-wrapper {
+  font-size: 19px;
+}
+
 
 .check-circle {
   height: 20px;
@@ -205,12 +219,17 @@ img.man {
 .second-section {
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
+  margin-top: 50px;
+}
+
+.second-section .sub-title {
+  font-size: 35px;
 }
 
 .top-sub-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bottom-sub-section {
@@ -218,7 +237,7 @@ img.man {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  margin-top: 70px;
+  margin-top: 15px;
 }
 
 .card {
@@ -249,12 +268,12 @@ p.text.alignment {
 .third-section {
   display: flex;
   margin-top: 80px;
-  max-height: 90vh;
 }
 
 img.woman {
   position: relative;
   left: -79px;
+  top: 6px;
   width: 650px;
 }
 
@@ -274,7 +293,7 @@ img.second-rectangle {
   z-index: -3;
 }
 
-.right-container.new {
+.right-container.two {
   display: flex;
   flex-direction: column;
 }
@@ -283,7 +302,6 @@ img.second-rectangle {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 30px;
 }
 
 .text-section img.check-circle {
@@ -292,15 +310,19 @@ img.second-rectangle {
   margin-right: 20px;
 }
 
+.second-section .top-sub-section .sub-title {
+  font-size: 25px;
+}
+
 /* Fourth section ========================================*/
 .fourth-section {
   display: flex;
-  max-height: 70vh;
 }
 
-.woman-2 {
+img.woman-2 {
   position: relative;
   left: -119px;
+  top: 6px;
   width: 650px;
 }
 
@@ -333,8 +355,13 @@ img.second-rectangle {
   margin-top: 50px;
 }
 
-/* Footer ========================================== */
+.right-container.three{
+  position: relative;
+  top: 20px;
+  left: 62px;
+}
 
+/* Footer ========================================== */
 .footer {
   display: flex;
   height: 200px;
@@ -352,4 +379,12 @@ img.second-rectangle {
 .footer .column .logo p.remote,
 .footer .column p.text.copyright {
   color: white;
+}
+
+/* section global */
+.first-section,
+.second-section,
+.third-section,
+.fourth-section {
+  max-height: 70vh;
 }
