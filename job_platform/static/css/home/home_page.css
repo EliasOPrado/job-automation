@@ -5,11 +5,17 @@
   font-family: Roboto, sans-serif;
 }
 
+html {
+  position: relative;
+}
+
+
 .landing-page-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1519px;
+  height: 100%;
   padding-left: 100px;
   padding-right: 100px;
 }
@@ -242,7 +248,6 @@ p.text.alignment {
 /* Third section ========================================*/
 .third-section {
   display: flex;
-  max-height: 100vh;
   margin-top: 80px;
   max-height: 90vh;
 }
@@ -290,7 +295,7 @@ img.second-rectangle {
 /* Fourth section ========================================*/
 .fourth-section {
   display: flex;
-  max-height: 100vh;
+  max-height: 70vh;
 }
 
 .woman-2 {
@@ -326,4 +331,25 @@ img.second-rectangle {
 
 .fourth-section button.main-button {
   margin-top: 50px;
+}
+
+/* Footer ========================================== */
+
+.footer {
+  display: flex;
+  height: 200px;
+  background-color: black;
+}
+
+.footer .column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+}
+
+.footer .column .logo p.pro,
+.footer .column .logo p.remote,
+.footer .column p.text.copyright {
+  color: white;
 }
