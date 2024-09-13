@@ -1,0 +1,139 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" >
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link href="{% static 'css/home/home_page.css' %}" rel="stylesheet">
+  <title>Job.remote</title>
+</head>
+
+<body>
+  <div class="landing-page-container">
+    <div class="header">
+      <div class="logo">
+        <p class="pro">Pro</p>
+        <p class="dot">.</p>
+        <p class="remote">remote</p>
+      </div>
+      <div class="right-header-inner-container">
+        <p class="text">About</p>
+        <p class="text">Sign In</p>
+        <button class="button">Sign Up Now</button>
+      </div>
+    </div>
+    <div class="first-section">
+      <div class="left-container one">
+        <p class="main-title">Find the Best Remote <br /> Jobs Overseas Fast</p>
+        <p class="sub-title">The only platform you need to accesllerate your applications to companies in different
+          parts of the world 🌎</p>
+        <ul>
+          <li>Easy Subscription</li>
+          <li>Quick Apllication</li>
+          <li>Everything Free</li>
+        </ul>
+        <button class="main-button">Sign Up Now</button>
+      </div>
+      <div class="right-container one">
+        <img class="man" src="{% static 'images/man.png' %}" />
+        <img class="middle-texture" src="{% static 'images/texture.svg' %}" />
+        <img class="rectangle" src="{% static 'images/rectangle-33.svg' %}" />
+        <div data-aos="fade-up" data-aos-duration="1800"class="position-container-one">
+          <img src="{% static 'images/check-circle-24px-blue.svg' %}" class="check-circle">
+          <p class="text-wrapper">Java Developer</p>
+        </div>
+        <div data-aos="fade-up" data-aos-duration="2000" class="position-container-two">
+          <img src="{% static 'images/check-circle-24px-blue.svg' %}" class="check-circle">
+          <p class="text-wrapper">Front end React Developer</p>
+        </div>
+      </div>
+    </div>
+    <div class="second-section">
+      <div class="top-sub-section">
+        <p class="title">Only Three <br/>Steps to Start Apllying</p>
+        <p class="sub-title">Follow all the steps then start <br/>applying without costs</p>
+      </div>
+      <div class="bottom-sub-section">
+        <div class="card" data-aos="fade-up" data-aos-duration="1300">
+          <img class="section-icon" src="{% static 'images/face-unlock-24px.svg' %}" alt="">
+          <p class="text">Create your account</p>
+        </div>
+        <div class="section" class="card" data-aos="fade-up" data-aos-duration="1400">
+          <img src="{% static 'images/arrow-forward-24px.svg' %}" alt="">
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-duration="1600">
+          <img class="section-icon" src="{% static 'images/work-24px.svg' %}" alt="">
+          <p class="text">Access the job posts</p>
+        </div>
+        <div class="section" class="card" data-aos="fade-up" data-aos-duration="1700">
+          <img src="{% static 'images/arrow-forward-24px.svg' %}" alt="">
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-duration="1900">
+          <img class="section-icon" src="{% static 'images/check-circle-outline-24px.svg' %}" alt="">
+          <p class="text alignment">Apply directly on the <br /> company’s platform</p>
+        </div>
+      </div>
+    </div>
+    <div class="third-section">
+      <div class="left-container two">
+        <img class="woman" src="{% static 'images/woman.png' %}" />
+        <img class="second-middle-texture" src="{% static 'images/texture.svg' %}" />
+        <img class="second-rectangle" src="{% static 'images/rectangle-39.svg' %}" />
+      </div>
+      <div class="right-container two">
+        <p class="title">Why Job Seekers Love Our Plarform</p>
+        <p class="sub-title">The main goal is to put in front the best job opportunities quick.</p>
+        <div class="text-section">
+          <img src="{% static 'images/check-circle-24px.svg' %}" class="check-circle">
+          <p class="text">With easy authentication, you won’t need to place a lot of information</p>
+        </div>
+        <div class="text-section">
+          <img src="{% static 'images/check-circle-24px.svg' %}" class="check-circle">
+          <p class="text">Straight forward, as soon the user authenticate, they will access the jobs board.</p>
+        </div>
+        <button class="main-button">Sign Up Now</button>
+      </div>
+    </div>
+    <div class="fourth-section">
+      <div class="left-container three">
+        <p class="title">Apply for More Jobs in Less Time </p>
+        <p class="sub-title">You can easily apply for multiple jobs positions with tailored messages and different curriculums</p>
+        <p class="text">This and much more is being implemented for you speed your job applications.</p>
+        <button class="main-button">Sign Up Now</button>
+      </div>
+      <div class="right-container three">
+        <img class="woman-2" src="{% static 'images/woman-2.png' %}" />
+        <img class="third-middle-texture" src="{% static 'images/texture.svg' %}" />
+        <img class="third-rectangle" src="{% static 'images/rectangle-40.svg' %}" />
+      </div>
+    </div>
+    <div class="footer">
+      <div class="column">
+        <div class="logo">
+          <p class="pro">Pro</p>
+          <p class="dot">.</p>
+          <p class="remote">remote</p>
+        </div>
+      </div>
+      <div class="column">
+        <p class="text copyright">&copy; Copyright Elias Prado</p>
+      </div>
+      <div class="column"></div>
+    </div>
+  </div>
+  <!--landing-page-container (end)-->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>
