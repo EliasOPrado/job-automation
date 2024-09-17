@@ -16,9 +16,13 @@
 
 <body>
   <div class="landing-page-container">
-    {% include "header.html" %}
+    {% if page != 'signin' and page != 'signup' %}
+      {% include "header.html" %}
+    {% endif %}
     {% block content %}{% endblock %}
-    {% include "footer.html" %}
+    {% if page != 'signin' and page != 'signup' %}
+      {% include "footer.html" %}
+    {% endif %}
   </div>
   <!--landing-page-container (end)-->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

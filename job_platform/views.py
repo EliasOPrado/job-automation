@@ -10,12 +10,21 @@ class HomeView(View):
 
 class SignUpView(View):
     template_name = 'signup.html'
-    context = {'css_file':'signup_page.css'}
+    context = {
+        'page':'signup',
+        'css_file':'sign_page.css'
+        }
     def get(self, request):
         return render(request, self.template_name, self.context)
 
-class LoginView(View):
-    pass
+class SignInView(View):
+        template_name = 'signin.html'
+        context = {
+            'page':'signin',
+            'css_file':'sign_page.css'
+            }
+        def get(self, request):
+            return render(request, self.template_name, self.context)
 
 class JobListView(View):
     pass

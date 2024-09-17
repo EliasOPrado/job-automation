@@ -12,14 +12,23 @@
 
 .left-container {
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+.header.sign {
+    padding-left: 32%;
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
     width: 70%;
+    margin-bottom: 25%;
+}
+
+.form-container.signin {
+    margin-bottom: 41%;
 }
 
 .form-title {
@@ -56,8 +65,7 @@ button.form-button {
 img.signup-image {
     height: 705px;
     width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
