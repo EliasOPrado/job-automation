@@ -118,4 +118,28 @@ button.main-button {
   .fourth-section {
     min-height: 85vh;
   }
+
+  .main-title {
+    font-weight: 900;
+    font-size:45px;
+  }
+  
+  .title {
+    font-weight: 800;
+    font-size:40px;
+    margin: 0;
+  }
+  
+  .sub-title {
+    margin-top: 25px;
+    font-weight: 700;
+    font-size:25px;
+    color: #808080;
+  }
+  
+  .text {
+    font-weight: 500;
+    font-size:20px;
+    color: #808080;
+  }
   

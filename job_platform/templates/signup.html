@@ -4,8 +4,21 @@
 {% block content %}
     <div class="main-container">
         <div class="left-container">
-            
+            <form action="" class="form-container">
+                <p class="form-title">
+                    Sign Up
+                </p>
+                <input type="text" placeholder="username" class="main-input">
+                <input type="email" placeholder="email" class="main-input">
+                <input type="password" placeholder="password" class="main-input">
+                <input type="password" placeholder="confirm password" class="main-input">
+                <button class="form-button">
+                    Register
+                </button>
+            </form>
         </div>
-        <div class="right-container"></div>
+        <div class="right-container">
+            <img class="signup-image" src="{% static 'images/signup_image.png' %}" alt=""/>
+        </div>
     </div>
 {% endblock content %}
