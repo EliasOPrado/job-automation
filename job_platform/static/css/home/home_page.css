@@ -1,5 +1,7 @@
 html, body {
-  padding: 100px 0 100px 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
   padding: 0;
   box-sizing: border-box; 
   font-family: 'Poppins', sans-serif;
@@ -7,21 +9,21 @@ html, body {
 
 
 body {
-  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
+  height: 100vh; 
   margin: 0;
 }
 
+
 .landing-page-container {
+  flex: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 1100px;
-  height: 100%;
-  padding-left: 100px;
-  padding-right: 100px;
+  /* height: 100%; */
+  max-height: 100vh;
 }
 
 button.main-button {
@@ -318,6 +320,7 @@ img.second-rectangle {
 .fourth-section {
   display: flex;
   margin-top: 110px;
+  overflow: hidden;
 }
 
 img.woman-2 {
@@ -366,7 +369,9 @@ img.woman-2 {
 .footer {
   display: flex;
   height: 200px;
+  flex-shrink: 0;
   background-color: black;
+  margin-top: auto;
 }
 
 .footer .column {
@@ -387,5 +392,5 @@ img.woman-2 {
 .second-section,
 .third-section,
 .fourth-section {
-  max-height: 70vh;
+  min-height: 85vh;
 }
