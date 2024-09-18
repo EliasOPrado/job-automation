@@ -3,7 +3,8 @@ from .views import (
     HomeView, 
     SignUpView, 
     SignInView, 
-    JobListView
+    JobListView,
+    UserPageView
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     path('sign-up/', SignUpView.as_view(), name='signup-page'),
     path('sign-in/', SignInView.as_view(), name='signin-page'),
     path('job-list/', JobListView.as_view(), name='job-list-page'),
+    path('user-page/', UserPageView.as_view(), name='user-page'),
 ]

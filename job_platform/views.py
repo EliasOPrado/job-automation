@@ -36,4 +36,10 @@ class JobListView(View):
             return render(request, self.template_name, self.context)
 
 class UserPageView(View):
-    pass
+        template_name = 'user.html'
+        context = {
+            'page':'user',
+            'css_file':'user_page.css'
+            }
+        def get(self, request):
+            return render(request, self.template_name, self.context)
