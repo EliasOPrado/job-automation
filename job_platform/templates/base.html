@@ -20,7 +20,7 @@
       {% include "header.html" %}
     {% endif %}
     {% block content %}{% endblock %}
-    {% if page != 'signin' and page != 'signup' %}
+    {% if not page %}
       {% include "footer.html" %}
     {% endif %}
   </div>
