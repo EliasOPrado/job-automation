@@ -1,91 +1,3 @@
-html, body {
-  padding: 100px 0 100px 0;
-  padding: 0;
-  box-sizing: border-box; 
-  font-family: 'Poppins', sans-serif;
-}
-
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full viewport height */
-  margin: 0;
-}
-
-.landing-page-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1100px;
-  height: 100%;
-  padding-left: 100px;
-  padding-right: 100px;
-}
-
-button.main-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 260px;
-  height: 50px;
-  background-color: #F19763;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  margin-top: 20px;
-}
-
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-items: center;
-  justify-content: space-between;
-  height: 45px;
-  width: 100%;
-  max-width: 1440px;
-  margin-top: 20px;
-}
-
-.logo{
-  display: flex;
-  align-items: center;
-}
-
-.pro, .remote, .dot {
-  font-size: 30px;
-  font-weight: bold;
-  line-height: 0;
-}
-
-.dot {
-  font-size: 60px; 
-  color: #6366F1;
-  margin-bottom: 0; 
-  transform: translateY(-41px); 
-}
-
-
-.right-header-inner-container{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 365px;
-}
-
-button.button {
-  height: 40px;
-  width: 140px;
-  color: white;
-  font-weight: bold;
-  background: #6366F1;
-  border: none;
-  border-radius: 10px;
-  letter-spacing: 1px;
-}
-
 /* First section ========================================*/
 .component-texture {
   width: 285px;
@@ -318,6 +230,7 @@ img.second-rectangle {
 .fourth-section {
   display: flex;
   margin-top: 110px;
+  overflow: hidden;
 }
 
 img.woman-2 {
@@ -360,32 +273,4 @@ img.woman-2 {
   position: relative;
   top: 20px;
   left: 62px;
-}
-
-/* Footer ========================================== */
-.footer {
-  display: flex;
-  height: 200px;
-  background-color: black;
-}
-
-.footer .column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 33%;
-}
-
-.footer .column .logo p.pro,
-.footer .column .logo p.remote,
-.footer .column p.text.copyright {
-  color: white;
-}
-
-/* section global */
-.first-section,
-.second-section,
-.third-section,
-.fourth-section {
-  max-height: 70vh;
 }

@@ -1,35 +1,7 @@
+{% extends "base.html" %}
 {% load static %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" >
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link href="{% static 'css/home/home_page.css' %}" rel="stylesheet">
-  <title>Job.remote</title>
-</head>
-
-<body>
-  <div class="landing-page-container">
-    <div class="header">
-      <div class="logo">
-        <p class="pro">Pro</p>
-        <p class="dot">.</p>
-        <p class="remote">remote</p>
-      </div>
-      <div class="right-header-inner-container">
-        <p class="text">About</p>
-        <p class="text">Sign In</p>
-        <button class="button">Sign Up Now</button>
-      </div>
-    </div>
+{% block content %}
     <div class="first-section">
       <div class="left-container one">
         <p class="main-title">Find the Best Remote <br /> Jobs Overseas Fast</p>
@@ -56,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="second-section">
+    <div class="second-section" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="top-sub-section">
         <p class="title">Only Three <br/>Steps to Start Apllying</p>
         <p class="sub-title">Follow all the steps then start <br/>applying without costs</p>
@@ -82,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div class="third-section">
+    <div class="third-section" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="left-container two">
         <img class="woman" src="{% static 'images/woman.png' %}" />
         <img class="second-middle-texture" src="{% static 'images/texture.svg' %}" />
@@ -102,7 +74,7 @@
         <button class="main-button">Sign Up Now</button>
       </div>
     </div>
-    <div class="fourth-section">
+    <div class="fourth-section" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="left-container three">
         <p class="title">Apply for More Jobs in Less Time </p>
         <p class="sub-title">You can easily apply for multiple jobs positions with tailored messages and different curriculums</p>
@@ -115,25 +87,4 @@
         <img class="third-rectangle" src="{% static 'images/rectangle-40.svg' %}" />
       </div>
     </div>
-    <div class="footer">
-      <div class="column">
-        <div class="logo">
-          <p class="pro">Pro</p>
-          <p class="dot">.</p>
-          <p class="remote">remote</p>
-        </div>
-      </div>
-      <div class="column">
-        <p class="text copyright">&copy; Copyright Elias Prado</p>
-      </div>
-      <div class="column"></div>
-    </div>
-  </div>
-  <!--landing-page-container (end)-->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-</body>
-
-</html>
+{% endblock %}

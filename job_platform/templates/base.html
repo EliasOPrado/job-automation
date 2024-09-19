@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" >
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link href="{% static 'css/base.css' %} " rel="stylesheet">
+  <link href="{% static 'css/' %}{{css_file}}" rel="stylesheet">
+  <title>Job.remote</title>
+  <style>
+
+  </style>
+</head>
+
+
+<body>
+  <div class="landing-page-container {% if page == 'user' %} user-page-width {% endif %}">
+    {% if page != 'signin' and page != 'signup' %}
+      {% include "header.html" %}
+    {% endif %}
+    {% block content %}{% endblock %}
+    {% if not page %}
+      {% include "footer.html" %}
+    {% endif %}
+  </div>
+  <!--landing-page-container (end)-->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>

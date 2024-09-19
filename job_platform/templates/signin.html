@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="left-container">
+            <div class="header singn">
+                <div class="logo">
+                  <p class="pro">Pro</p>
+                  <p class="dot">.</p>
+                  <p class="remote">remote</p>
+                </div>
+            </div>
+            <form action="" class="form-container {% if page == 'signin'%}signin{% endif %}">
+                <p class="form-title">
+                   {% if page == 'signup' %} 
+                        Sign Up
+                    {% else %}
+                        Sign In
+                    {% endif %}
+                </p>
+                <input type="text" placeholder="username" class="main-input">
+                <input type="password" placeholder="password" class="main-input">
+                <button class="form-button">
+                    {% if page == 'signup' %} 
+                        Register
+                    {% else %}
+                        Login
+                    {% endif %}
+                </button>
+            </form>
+        </div>
+        <div class="right-container">
+            <img class="signup-image" src="{% static 'images/signin_image.png' %}" alt=""/>
+        </div>
+    </div>
+{% endblock content %}

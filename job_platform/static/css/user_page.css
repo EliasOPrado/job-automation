@@ -1,0 +1,139 @@
+.landing-page-container.user-page-width {
+    max-width: 1500px;
+}
+
+.main-container {
+    display: flex;
+    background-color: #f5f5f5;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.minor-left-container {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 10px;
+}
+
+.major-right-container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 10px;
+}
+
+.left-aside {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #cecece;
+    border-radius: 10px;
+}
+
+.left-aside {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    min-height: 88vh;
+    /* align-items: center; */
+}
+
+.user-name-and-icon, .section {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.user-name-and-icon {
+    padding: 15px;
+    margin-bottom: 100px;
+}
+
+.user-name-and-icon p.sub-title {
+    margin-left: 10px;
+}
+
+.user-icon {
+    height: 40px;
+}
+
+.user-icons {
+    height: 30px;
+}
+
+.section p.left-aside-text {
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #808080;
+    margin-left: 10px;
+}
+.cards-container {
+    display: flex;
+}
+.section-card {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #cecece;
+    border-radius: 10px;
+    height: 140px;
+    width: 360px;
+    margin: 0 20px 20px 20px;
+    margin-left: 10px;  
+    margin-right: 10px;
+}
+
+.section-card:first-child {
+    margin-left: 0;
+}
+
+.section-card:last-child {
+    margin-right: 0;
+}
+
+.section-card p.text {
+    margin: 0;
+}
+
+.section-card p.text.number {
+    margin-top: 10px;
+}
+
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #cecece;
+    border-radius: 10px;
+    height: 66vh;
+    padding: 20px;
+}
+
+.table-title{
+    margin-top: 25px;
+    font-weight: 400;
+    font-size: 20px; 
+    color: #808080;
+}
+
+/* tr.table-row-card td {
+    border-bottom-width: 1px;
+    border-bottom-color: #cecece;
+    border-bottom-style: solid;
+} */
+
+.table-item {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    height: 50px;
+    color: #808080;
+}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="job-list-search-container">
+    <input type="text" placeholder="Search for a job" class="search-input">
+    <button class="search-button">Seach</button>
+</div>
+<div class="main-container">
+    <div class="minor-left-container">
+        <div class="job-list-card">
+            <p class="job-list-sub-title">Software Developer</p>
+            <p class="job-list-main-text">Company Name</p>
+            <p class="job-list-main-text sm">New York, USA</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+        </div>
+        <div class="job-list-card">
+            <p class="job-list-sub-title">Software Developer</p>
+            <p class="job-list-main-text">Company Name</p>
+            <p class="job-list-main-text sm">New York, USA</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+        </div>
+        <div class="job-list-card">
+            <p class="job-list-sub-title">Software Developer</p>
+            <p class="job-list-main-text">Company Name</p>
+            <p class="job-list-main-text sm">New York, USA</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+        </div>
+        <button class="load-more">Load More</button>
+    </div>
+    <div class="major-right-container">
+        <div class="inner-container">
+            <p class="sub-title">Software Developer</p>
+            <p class="job-list-main-text">Company Name</p>
+            <p class="job-list-main-text sm">New York, USA</p>
+            <div class="application-container">
+                <button class="button job-detail">Apply on company website</button>
+                <img class="favorite-button" src="{% static 'images/favorite_border.svg'%}" alt="">
+            </div>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

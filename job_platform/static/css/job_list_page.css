@@ -1,0 +1,124 @@
+.main-container {
+    display: flex;
+    background-color: #f5f5f5;
+    padding: 10px;
+}
+
+.minor-left-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 10px;
+}
+
+.major-right-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 10px;
+}
+
+.job-list-card {
+    display: flex;
+    flex-direction: column;
+    /* width: 300px; */
+    padding: 20px;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #cecece;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.job-list-sub-title {
+    font-weight: 700;
+    font-size: 25px;
+    color: #808080;
+    margin-top: 0;
+    margin-bottom: 3px;
+}
+
+.job-list-main-text {
+    font-weight: 500;
+    font-size: 20px;
+    color: #808080;
+    margin-top: 0;
+    margin-bottom: 3px;
+}
+
+.job-list-main-text.sm {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.job-list-text {
+    color: #b2b1b1;
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+.inner-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #cecece;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    padding: 20px;
+    height: 100%;
+}
+
+.application-container {
+    display: flex;
+    padding: 25px 0 25px 0;
+}
+
+img.favorite-button {
+    height: 40px;
+    margin: 0 10px 0 10px;
+}
+.button.job-detail {
+    width: auto;
+    padding: 0 10px 0 10px;
+}
+
+button.load-more {
+    color: white;
+    height: 50px;
+    background-color: #007AFF;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.job-list-search-container {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 20px;
+    background-image: url('/static/images/rectangle-41.png');
+    background-size: cover;
+    min-height: 95px;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+}
+
+.search-input {
+    padding: 10px;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.search-button {
+    margin: 0 10px 0 10px;
+    height: 36px;
+    width: 95px;
+    border-radius: 5px;
+    border-style: none;
+    background: #003164;
+    color: white;
+}
