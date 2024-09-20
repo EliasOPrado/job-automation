@@ -66,7 +66,7 @@ class UserPageView(View):
         }
     def get(self, request):
         applications = Application.objects.all().order_by("date_applied")
-        paginator = Paginator(applications, per_page=10)
+        paginator = Paginator(applications, per_page=3)
         page_number = request.GET.get('page')
         page_object = paginator.get_page(page_number)
         self.context["page_object"] = page_object
