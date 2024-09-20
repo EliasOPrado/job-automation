@@ -12,11 +12,11 @@ document.head.appendChild(styleElement);
 // Function to update the nth-child rule
 function updateNthChild() {
     styleElement.textContent = `
-    .minor-left-container {
-        overflow-y:scroll;
-        height:85vh;
-    }
     .job-list-card:nth-child(n+${nthChildValue}) { display: none; }
+    .minor-left-container {
+        overflow-y: scroll;
+        height: 99vh;
+        }
     `;
 }
 
@@ -32,3 +32,11 @@ updateNthChild();
 // Add event listener for the button to increase the nth-child value
 loadMoreButton.addEventListener('click', increaseNthChild);
 
+
+// delete message
+setTimeout(function() {
+    let delete_messages = document.getElementsByClassName("message-container");
+    for (let i = 0; i < delete_messages.length; i++) {
+        delete_messages[i].style.display = "none"; // Hide each element
+    }
+}, 3000);

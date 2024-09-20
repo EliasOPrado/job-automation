@@ -3,8 +3,10 @@
 
 {% block content %}
 <div class="job-list-search-container">
-    <input type="text" placeholder="Search for a job" class="search-input">
-    <button class="search-button">Seach</button>
+    <form method="get" action="{% url 'job-list-page' %}"> <!-- Ensure the action points to the correct URL -->
+        <input type="text" name="query" placeholder="Search for a job" class="search-input">
+        <button type="submit" class="search-button">Search</button>
+    </form>
 </div>
 <div class="main-container">
     <div class="outter-left-container">
@@ -20,7 +22,7 @@
         </div>
         {% endfor %}
     </div>
-    <button id="load-more-button" onclick="increaseNthChild()" class="load-more">Load More</button>
+    <button id="load-more-button" class="load-more">Load More</button>
 </div>
     <div class="major-right-container">
         <div class="inner-container">
@@ -28,7 +30,9 @@
             <p class="job-list-main-text">{{ job.company_name }}</p>
             <p class="job-list-main-text sm">{{ job.location }}</p>
             <div class="application-container">
-                <button class="button job-detail">Apply on company website</button>
+                <a href="{{ job.url}}" target=”_blank”>
+                 <button class="button job-detail">Apply on company website</button>
+                </a>
                 <img class="favorite-button" src="{% static 'images/favorite_border.svg'%}" alt="">
             </div>
             <p class="job-list-text">{{ job.job_description|slice:":1420" }}...</p>

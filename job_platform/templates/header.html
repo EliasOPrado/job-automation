@@ -10,3 +10,8 @@
       <button class="button">Sign Up Now</button>
     </div>
   </div>
+  {% if messages %}
+    {% for message in messages %}
+        <p class="message-container">{{message}}</p>
+    {% endfor %}
+{% endif %}

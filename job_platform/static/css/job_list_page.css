@@ -42,6 +42,7 @@
 
 a {
     text-decoration: none;
+    cursor:pointer;
 }
 
 .job-list-card:hover {
@@ -107,6 +108,12 @@ img.favorite-button {
     padding: 0 10px 0 10px;
 }
 
+.button.job-detail:hover {
+    transform: scale(1.01);
+    background-color: #258cf9;
+    cursor: pointer;
+}
+
 button.load-more {
     color: white;
     height: 50px;
@@ -117,6 +124,7 @@ button.load-more {
 
 button.load-more:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 button.load-more:active {

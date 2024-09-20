@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
 from django.views import View
 from core.models import JobApplication
 
@@ -39,7 +40,17 @@ class JobListView(View):
                 job_position = get_object_or_404(JobApplication, pk=id)
                 self.context["job"] = job_position
             
-            job_positions = JobApplication.objects.all()
+            query = request.GET.get('query', '')
+        
+            # Filter job positions based on the query
+            if query:
+                job_positions = JobApplication.objects.filter(job_title__icontains=query)
+                if not job_positions.exists():  # Check if the queryset is empty
+                    job_positions = JobApplication.objects.all()
+                    messages.error(request, f"No results for query: '{query}'")
+            else:
+                job_positions = JobApplication.objects.all()
+            
             self.context["jobs"] = job_positions
             return render(request, self.template_name, self.context)
 

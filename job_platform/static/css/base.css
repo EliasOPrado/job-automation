@@ -53,6 +53,14 @@ button.main-button {
     max-width: 1440px;
     margin-top: 20px;
   }
+
+  .message-container {
+    background-color: #FFB86C;
+    padding: 10px;
+    color: white;
+    margin-bottom: 0;
+    border-radius: 10px;
+  }
   
   .logo{
     display: flex;
