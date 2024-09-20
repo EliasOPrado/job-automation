@@ -7,42 +7,31 @@
     <button class="search-button">Seach</button>
 </div>
 <div class="main-container">
+    <div class="outter-left-container">
     <div class="minor-left-container">
-        <div class="job-list-card">
-            <p class="job-list-sub-title">Software Developer</p>
-            <p class="job-list-main-text">Company Name</p>
-            <p class="job-list-main-text sm">New York, USA</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+        {% for single_job in jobs %}
+        <div class="job-list-card {% if single_job.id == job.id %} set-card {% endif %}">
+            <a href="{% url 'job-detail-page' single_job.pk %}">
+                <p class="job-list-sub-title">{{ single_job.job_title|slice:"24" }}</p>
+                <p class="job-list-main-text">{{ single_job.company_name }}</p>
+                <p class="job-list-main-text sm">{{ single_job.location }}</p>
+                <p class="job-list-text">{{ single_job.job_description|slice:":100" }}...</p>
+            </a>
         </div>
-        <div class="job-list-card">
-            <p class="job-list-sub-title">Software Developer</p>
-            <p class="job-list-main-text">Company Name</p>
-            <p class="job-list-main-text sm">New York, USA</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
-        </div>
-        <div class="job-list-card">
-            <p class="job-list-sub-title">Software Developer</p>
-            <p class="job-list-main-text">Company Name</p>
-            <p class="job-list-main-text sm">New York, USA</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
-        </div>
-        <button class="load-more">Load More</button>
+        {% endfor %}
     </div>
+    <button id="load-more-button" onclick="increaseNthChild()" class="load-more">Load More</button>
+</div>
     <div class="major-right-container">
         <div class="inner-container">
-            <p class="sub-title">Software Developer</p>
-            <p class="job-list-main-text">Company Name</p>
-            <p class="job-list-main-text sm">New York, USA</p>
+            <p class="sub-title">{{ job.job_title }}</p>
+            <p class="job-list-main-text">{{ job.company_name }}</p>
+            <p class="job-list-main-text sm">{{ job.location }}</p>
             <div class="application-container">
                 <button class="button job-detail">Apply on company website</button>
                 <img class="favorite-button" src="{% static 'images/favorite_border.svg'%}" alt="">
             </div>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
-            <p class="job-list-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius urna diam, a accumsan sapien lacinia in</p>
+            <p class="job-list-text">{{ job.job_description|slice:":1420" }}...</p>
         </div>
     </div>
 </div>

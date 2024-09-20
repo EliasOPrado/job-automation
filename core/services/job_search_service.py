@@ -28,6 +28,14 @@ class UltilityMethods:
                 return True
         return False
 
+    def extract_first_email(text):
+        # Regular expression for matching an email
+        email_pattern = r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+        # Find all matches in the text
+        emails = re.findall(email_pattern, text)
+        # Return the first email if found, else return None
+        return emails[0] if emails else None
+
 
 class LinkedinJobSearchServiceAutomation:
     def __init__(self, email, password, keyword):
@@ -362,6 +370,7 @@ class DjangoJobsSearchAutomation:
                                 "job_title": job_title,
                                 "company_name": company_name,
                                 "job_description": job_description,
+                                "company_email": UltilityMethods.extract_first_email(job_description),
                             },
                         )
                         if created:

@@ -15,6 +15,8 @@ class JobApplication(models.Model):
     job_title = models.CharField(max_length=255)
     company_name = models.CharField(max_length=255)
     job_description = models.TextField()
+    location = models.CharField(max_length=255, default="Remote")
+    company_email = models.EmailField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return f"{self.job_title} at {self.company_name}"

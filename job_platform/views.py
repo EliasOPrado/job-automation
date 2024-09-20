@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
+from core.models import JobApplication
 
 # Create your views here.
 class HomeView(View):
@@ -30,9 +31,16 @@ class JobListView(View):
         template_name = 'job_list.html'
         context = {
             'page':'job_list',
-            'css_file':'job_list_page.css'
+            'css_file':'job_list_page.css',
+            'job':JobApplication.objects.first()
             }
-        def get(self, request):
+        def get(self, request, id=None):
+            if id:
+                job_position = get_object_or_404(JobApplication, pk=id)
+                self.context["job"] = job_position
+            
+            job_positions = JobApplication.objects.all()
+            self.context["jobs"] = job_positions
             return render(request, self.template_name, self.context)
 
 class UserPageView(View):
