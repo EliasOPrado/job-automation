@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class LinkedInSession(models.Model):
     email = models.EmailField()  # Store the associated email to link session cookies
@@ -20,3 +20,18 @@ class JobApplication(models.Model):
 
     def __str__(self):
         return f"{self.job_title} at {self.company_name}"
+
+class Application(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job_applied = models.ForeignKey(JobApplication, on_delete=models.DO_NOTHING)
+    date_applied = models.DateTimeField(auto_now_add=True)  # Automatically set the date when the application is created
+    status = models.CharField(max_length=50, choices=[
+        ('applied', 'Applied'),
+        ('interview', 'Interview'),
+        ('offer', 'Offer'),
+        ('rejected', 'Rejected'),
+        ('withdrawn', 'Withdrawn'),
+    ], default='applied')
+
+    def __str__(self):
+        return f"{self.user.username} applied for {self.job_applied.job_title} on {self.date_applied.strftime('%Y-%m-%d')}"

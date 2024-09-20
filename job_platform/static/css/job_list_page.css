@@ -40,10 +40,7 @@
     display: none; 
 } */
 
-a {
-    text-decoration: none;
-    cursor:pointer;
-}
+
 
 .job-list-card:hover {
     border-color: #007AFF;

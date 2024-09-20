@@ -29,15 +29,15 @@
         <div class="cards-container">
             <div class="section-card">
                 <p class="text">Jobs Applied Today</p>
-                <p class="text number">123</p>
+                <p class="text number">{{ applications_today }}</p>
             </div>
             <div class="section-card">
-                <p class="text">Jobs Applied Last Week</p>
-                <p class="text number">123</p>
+                <p class="text">Jobs Applied This Week</p>
+                <p class="text number">{{ applications_this_week }}</p>
             </div>
             <div class="section-card">
-                <p class="text">Jobs Applied Last Month</p>
-                <p class="text  number">123</p>
+                <p class="text">Jobs Applied This Month</p>
+                <p class="text  number">{{ applications_this_month }}</p>
             </div>
         </div>
         <div class="jobs-list">
@@ -49,48 +49,15 @@
                     <th class="table-title">Is Favorite</th>
                 </tr>
                 <tbody>
-                    <tr class="table-row-card">
-                        <td class="table-item">Item 1</td>
-                        <td class="table-item">Jan 03 2024</td>
-                        <td class="table-item">johndoe@email.com</td>
-                        <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td>
-                    </tr>
-                    <tr class="table-row-card">
-                        <td class="table-item">Item 1</td>
-                        <td class="table-item">Jan 03 2024</td>
-                        <td class="table-item">johndoe@email.com</td>
-                        <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td>
-                    </tr>
-                    <tr class="table-row-card">
-                        <td class="table-item">Item 1</td>
-                        <td class="table-item">Jan 03 2024</td>
-                        <td class="table-item">johndoe@email.com</td>
-                        <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td>
-                    </tr>
-                    <tr class="table-row-card">
-                        <td class="table-item">Item 1</td>
-                        <td class="table-item">Jan 03 2024</td>
-                        <td class="table-item">johndoe@email.com</td>
-                        <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td>
-                    </tr>
-                    <tr class="table-row-card">
-                        <td class="table-item">Item 1</td>
-                        <td class="table-item">Jan 03 2024</td>
-                        <td class="table-item">johndoe@email.com</td>
-                        <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td>
-                    </tr>
-                    <tr class="table-row-card">
-                        <td class="table-item">Item 1</td>
-                        <td class="table-item">Jan 03 2024</td>
-                        <td class="table-item">johndoe@email.com</td>
-                        <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td>
-                    </tr>
-                    <tr class="table-row-card">
-                        <td class="table-item">Item 1</td>
-                        <td class="table-item">Jan 03 2024</td>
-                        <td class="table-item">johndoe@email.com</td>
-                        <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td>
-                    </tr>
+                    {% for application in page_object %}
+                        <tr class="table-row-card">
+                            <td class="table-item">{{ application.job_applied.job_title }}</td>
+                            <td class="table-item">{{ application.date_applied|date:"Y, M d-D" }}</td>
+                            <td class="table-item">{{ application.job_applied.company_email }}</td>
+                            <td class="table-item">{{ application.status }}</td>
+                            <!-- <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td> -->
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
