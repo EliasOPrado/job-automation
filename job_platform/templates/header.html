@@ -1,10 +1,13 @@
 <div class="header">
+  <a href="{% url 'home-page' %}">
     <div class="logo">
-      <p class="pro">Pro</p>
-      <p class="dot">.</p>
-      <p class="remote">remote</p>
+        <p class="pro">Pro</p>
+        <p class="dot">.</p>
+        <p class="remote">remote</p>
     </div>
+  </a>
     <div class="right-header-inner-container">
+      <a href="{% url 'job-list-page' %}"><p class="text">Jobs</p></a>
       <p class="text">About</p>
       <p class="text">Sign In</p>
       <button class="button">Sign Up Now</button>
@@ -14,4 +17,4 @@
     {% for message in messages %}
         <p class="message-container">{{message}}</p>
     {% endfor %}
-{% endif %}
+  {% endif %}

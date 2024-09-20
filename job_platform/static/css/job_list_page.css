@@ -114,6 +114,8 @@ img.favorite-button {
     cursor: pointer;
 }
 
+
+
 button.load-more {
     color: white;
     height: 50px;
@@ -158,4 +160,10 @@ button.load-more:active {
     border-style: none;
     background: #003164;
     color: white;
+}
+
+.search-button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    background: #245e9c;
 }
