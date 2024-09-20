@@ -27,26 +27,27 @@
     </div>
     <div class="major-right-container">
         <div class="cards-container">
-            <div class="section-card">
+            <div class="section-card today">
                 <p class="text">Jobs Applied Today</p>
                 <p class="text number">{{ applications_today }}</p>
             </div>
-            <div class="section-card">
+            <div class="section-card week">
                 <p class="text">Jobs Applied This Week</p>
                 <p class="text number">{{ applications_this_week }}</p>
             </div>
-            <div class="section-card">
+            <div class="section-card month">
                 <p class="text">Jobs Applied This Month</p>
                 <p class="text  number">{{ applications_this_month }}</p>
             </div>
         </div>
         <div class="jobs-list">
             <table>
-                <tr class="e">
+                <tr class="table-head">
                     <th class="table-title">Job Title</th>
                     <th class="table-title">Date Applied</th>
                     <th class="table-title">Email</th>
-                    <th class="table-title">Is Favorite</th>
+                    <th class="table-title">Status</th>
+                    <!-- <th class="table-title">Is Favorite</th> -->
                 </tr>
                 <tbody>
                     {% for application in page_object %}

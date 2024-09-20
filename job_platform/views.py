@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils import timezone
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.views import View
+from .forms import ApplicationStatusForm
 from core.models import JobApplication, Application
 
 # Create your views here.
@@ -65,7 +66,7 @@ class UserPageView(View):
         }
     def get(self, request):
         applications = Application.objects.all().order_by("date_applied")
-        paginator = Paginator(applications, per_page=5)
+        paginator = Paginator(applications, per_page=10)
         page_number = request.GET.get('page')
         page_object = paginator.get_page(page_number)
         self.context["page_object"] = page_object
@@ -85,3 +86,15 @@ class UserPageView(View):
         self.context['applications_this_month'] = applications_this_month
 
         return render(request, self.template_name, self.context)
+    
+    def post(self, request):
+        application_id = request.POST.get('application_id')
+        application = get_object_or_404(Application, id=application_id)
+
+        form = ApplicationStatusForm(request.POST, instance=application)
+        if form.is_valid():
+            form.save()
+            return redirect('user-page')
+
+        # If the form is not valid, you might want to render the page again
+        return self.get(request)
