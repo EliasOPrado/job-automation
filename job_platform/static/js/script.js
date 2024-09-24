@@ -15,9 +15,10 @@ document.head.appendChild(styleElement);
 function updateNthChild() {
     styleElement.textContent = `
     .job-list-card:nth-child(n+${nthChildValue}) { display: none; }
-    .minor-left-container {
+    .inner-left-container {
         overflow-y: scroll;
-        height: 99vh;
+        height: 62vh;
+        border-radius: 10px;
         }
     `;
 }

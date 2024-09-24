@@ -10,20 +10,20 @@
 </div>
 <div class="main-container">
     <div class="outter-left-container">
-    <div class="minor-left-container">
-        {% for single_job in jobs %}
-        <div class="job-list-card {% if single_job.id == job.id %} set-card {% endif %}">
-            <a href="{% url 'job-detail-page' single_job.pk %}">
-                <p class="job-list-sub-title">{{ single_job.job_title|slice:"24" }}</p>
-                <p class="job-list-main-text">{{ single_job.company_name }}</p>
-                <p class="job-list-main-text sm">{{ single_job.location }}</p>
-                <p class="job-list-text">{{ single_job.job_description|slice:":100" }}...</p>
-            </a>
+        <div class="inner-left-container">
+            {% for single_job in jobs %}
+            <div class="job-list-card {% if single_job.id == job.id %} set-card {% endif %}">
+                <a href="{% url 'job-detail-page' single_job.pk %}">
+                    <p class="job-list-sub-title">{{ single_job.job_title|slice:"24" }}</p>
+                    <p class="job-list-main-text">{{ single_job.company_name }}</p>
+                    <p class="job-list-main-text sm">{{ single_job.location }}</p>
+                    <p class="job-list-text">{{ single_job.job_description|slice:":100" }}...</p>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <button id="load-more-button" class="load-more">Load More</button>
     </div>
-    <button id="load-more-button" class="load-more">Load More</button>
-</div>
     <div class="major-right-container">
         <div class="inner-container">
             <p class="sub-title">{{ job.job_title }}</p>
