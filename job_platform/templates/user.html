@@ -3,30 +3,30 @@
 
 {% block content %}
 <div class="main-container">
-    <div class="minor-left-container">
-        <div class="left-aside">
-            <div class="user-name-and-icon">
-                <!-- <img class="user-icon" src="{% static 'images/user_avatar_icon.png'%}" alt=""> -->
-                <p class="sub-title">Hello John Doe</p>
+    <!-- Add logic wrapper here -->
+    <div id="overlay" class="overlay"></div>
+    <div id="modal" class="user-modal-container">
+        <form method="post" class="form-container change-user">
+            {% csrf_token %}
+            <div class="form-title">
+                Update Your Data
+                <span id="close-modal" class="close-modal-button">
+                    x
+                </span>
             </div>
-            <div class="user-utils-section">
-                <div class="section">
-                    <img src="{% static 'images/tool_icon.svg'%}" alt="" class="user-icons">
-                    <p class="left-aside-text">Edit User Account</p>
-                </div>
-                <div class="section">
-                    <img src="{% static 'images/download_icon.svg'%}" alt="" class="user-icons">
-                    <p class="left-aside-text">Download Applications</p>
-                </div>
-                <div class="section">
-                    <img src="{% static 'images/upload_icon.svg'%}" alt="" class="user-icons">
-                    <p class="left-aside-text">Upload Your CV</p>
-                </div>
-            </div>
-        </div>
+            {{ custom_user_change_form.username }}
+            {{ custom_user_change_form.email }}
+            {{ custom_user_change_form.first_name }}
+            {{ custom_user_change_form.last_name }}
+            <button class="form-button" name="change-user-form">Change My User Data</button>
+        </form>
     </div>
     <div class="major-right-container">
         <div class="cards-container">
+            <button id="open-modal" class="section-card section">
+                <img src="{% static 'images/tool_icon.svg'%}" alt="" class="user-icons">
+                <p class="left-aside-text">Edit User Account</p>
+            </button>
             <div class="section-card today">
                 <p class="text">Jobs Applied Today</p>
                 <p class="text number">{{ applications_today }}</p>
@@ -40,53 +40,57 @@
                 <p class="text  number">{{ applications_this_month }}</p>
             </div>
         </div>
-        <div class="jobs-list">
-            <table>
-                <tr class="table-head">
-                    <th class="table-title">Job Title</th>
-                    <th class="table-title">Date Applied</th>
-                    <th class="table-title">Email</th>
-                    <th class="table-title">Status</th>
-                    <!-- <th class="table-title">Is Favorite</th> -->
-                </tr>
-                <tbody>
-                    {% for application in page_object %}
-                        <tr class="table-row-card">
-                            <td class="table-item">{{ application.job_applied.job_title }}</td>
-                            <td class="table-item">{{ application.date_applied|date:"Y, M d-D" }}</td>
-                            <td class="table-item">{{ application.job_applied.company_email }}</td>
-                            <td class="table-item">{{ application.status }}</td>
-                            <!-- <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td> -->
-                        </tr>
-                    {% endfor %}
-                </tbody>
+        
+            {% if count_applications > 0 %}
+                <table class="table-container">
+                    <tr class="table-head">
+                        <th class="table-title">Job Title</th>
+                        <th class="table-title">Date Applied</th>
+                        <th class="table-title">Email</th>
+                        <th class="table-title">Status</th>
+                        <!-- <th class="table-title">Is Favorite</th> -->
+                    </tr>
+                    <tbody>
+                        {% for application in page_object %}
+                            <tr class="table-row-card">
+                                <td class="table-item">{{ application.job_applied.job_title }}</td>
+                                <td class="table-item">{{ application.date_applied|date:"Y, M d-D" }}</td>
+                                <td class="table-item">{{ application.job_applied.company_email }}</td>
+                                <td class="table-item">{{ application.status }}</td>
+                                <!-- <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td> -->
+                            </tr>
+                        {% endfor %}
+                    </tbody>
             </table>
-        </div>
-<!-- Pagination Controls -->
-<div class="pagination">
-    {% if page_object.has_previous %}
-       
-            <a href="?page={{ page_object.previous_page_number }}">previous</a>
-     
-    {% endif %}
+            {% else %}
+                <div class="jobs-message-container">
+                    <p class="sub-title message">You have no applications yet 😴</p>
+                </div>
+            {% endif %}
+        <!-- Pagination Controls -->   
+        {% if count_applications > 0 %}
+            <div class="pagination">
+                {% if page_object.has_previous %}
+                    <a href="?page={{ page_object.previous_page_number }}">Previous</a>
+                {% endif %}
+                <!-- Display page numbers -->
+                {% for num in page_object.paginator.page_range %}
+                    {% if num == page_object.number %}
+                        <div class="pagination-cell current">
+                            <span>{{ num }}</span>  <!-- Current page -->
+                        </div>
+                    {% else %}
+                        <div class="pagination-cell">
+                            <a href="?page={{ num }}">{{ num }}</a>  <!-- Other pages -->
+                        </div>
+                    {% endif %}
+                {% endfor %}
 
-    <!-- Display page numbers -->
-    {% for num in page_object.paginator.page_range %}
-        {% if num == page_object.number %}
-            <div class="pagination-cell current">
-                <span>{{ num }}</span>  <!-- Current page -->
-            </div>
-        {% else %}
-            <div class="pagination-cell">
-                <a href="?page={{ num }}">{{ num }}</a>  <!-- Other pages -->
+                {% if page_object.has_next %}
+                    <div class="pagination-cell">
+                        <a href="?page={{ page_object.next_page_number }}">Next</a>
+                    </div>
+                {% endif %}
             </div>
         {% endif %}
-    {% endfor %}
-
-    {% if page_object.has_next %}
-      
-            <a href="?page={{ page_object.next_page_number }}">next</a>
-  
-    {% endif %}
-</div>
 {% endblock %}

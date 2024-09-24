@@ -9,8 +9,13 @@
     <div class="right-header-inner-container">
       <a href="{% url 'job-list-page' %}"><p class="text">Jobs</p></a>
       <p class="text">About</p>
-      <p class="text">Sign In</p>
-      <button class="button">Sign Up Now</button>
+      {% if not user.is_authenticated %}
+        <a href="{% url 'signin-page' %}"><p class="text">Sign In</p></a>
+        <a href="{% url 'signup-page' %}"><button class="button">Sign Up Now</button></a>
+      {% else %}
+        <a href="{% url 'signout' %}"><p class="text">Logout</p></a>
+        <a href="{% url 'user-page' %}"><p class="text">Hello {{ user.username }}</p> </a>
+      {% endif %}
     </div>
   </div>
   {% if messages %}
