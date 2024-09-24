@@ -31,7 +31,7 @@ class SignUpView(View):
         self.context['form'] = form
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('signin-page')
         for field, errors in form.errors.items():
             for error in errors:
                 messages.error(request, f"{field}: {error}")
