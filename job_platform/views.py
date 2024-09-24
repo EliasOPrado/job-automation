@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.views import View
 from .forms import ApplicationStatusForm
 from core.models import JobApplication, Application
+from .forms import CustomUserCreationForm
 
 # Create your views here.
 class HomeView(View):
@@ -21,6 +22,20 @@ class SignUpView(View):
         'css_file':'sign_page.css'
         }
     def get(self, request):
+        form = CustomUserCreationForm()
+        self.context['form'] = form
+        return render(request, self.template_name, self.context)
+    
+    def post(self, request):
+        form = CustomUserCreationForm(request.POST)
+        self.context['form'] = form
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(request, f"{field}: {error}")
+
         return render(request, self.template_name, self.context)
 
 class SignInView(View):

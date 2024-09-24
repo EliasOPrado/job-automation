@@ -11,17 +11,27 @@
                   <p class="remote">remote</p>
                 </div>
             </div>
-            <form action="" class="form-container">
+            <form method="post" class="form-container">
+                {% csrf_token %}
                 <p class="form-title">
                     Sign Up
                 </p>
-                <input type="text" placeholder="username" class="main-input">
+                {{ form.username }}
+                {{ form.email }}
+                {{ form.password1 }}
+                {{ form.password2 }}
+                <!-- <input type="text" placeholder="username" class="main-input">
                 <input type="email" placeholder="email" class="main-input">
                 <input type="password" placeholder="password" class="main-input">
-                <input type="password" placeholder="confirm password" class="main-input">
+                <input type="password" placeholder="confirm password" class="main-input"> -->
                 <button class="form-button">
                     Register
                 </button>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message-container">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
             </form>
         </div>
         <div class="right-container">
