@@ -107,7 +107,7 @@ class UserPageView(View):
         'css_file':'user_page.css'
         }
     def get(self, request):
-        applications = Application.objects.all().order_by("date_applied")
+        applications = Application.objects.filter(user=request.user).order_by("date_applied")
         paginator = Paginator(applications, per_page=10)
         page_number = request.GET.get('page')
         page_object = paginator.get_page(page_number)
@@ -118,11 +118,12 @@ class UserPageView(View):
         start_of_week = today - timezone.timedelta(days=today.weekday())  # Monday
         start_of_month = today.replace(day=1)
 
-        applications_today = Application.objects.filter(date_applied__date=today).count()
-        applications_this_week = Application.objects.filter(date_applied__date__gte=start_of_week).count()
-        applications_this_month = Application.objects.filter(date_applied__date__gte=start_of_month).count()
+        applications_today = Application.objects.filter(date_applied__date=today, user=request.user).count()
+        applications_this_week = Application.objects.filter(date_applied__date__gte=start_of_week, user=request.user).count()
+        applications_this_month = Application.objects.filter(date_applied__date__gte=start_of_month, user=request.user).count()
 
         # Remove the trailing commas
+        self.context['count_applications'] = applications.count()
         self.context['applications_today'] = applications_today
         self.context['applications_this_week'] = applications_this_week
         self.context['applications_this_month'] = applications_this_month
@@ -131,7 +132,7 @@ class UserPageView(View):
     
     def post(self, request):
         application_id = request.POST.get('application_id')
-        application = get_object_or_404(Application, id=application_id)
+        application = get_object_or_404(Application, id=application_id, user=request.user)
 
         form = ApplicationStatusForm(request.POST, instance=application)
         if form.is_valid():

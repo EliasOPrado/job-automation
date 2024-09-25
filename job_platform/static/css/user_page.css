@@ -61,6 +61,10 @@
     height: 30px;
 }
 
+.sub-title.message {
+    margin: 25px;
+}
+
 .section p.left-aside-text {
     font-family: sans-serif;
     font-weight: 500;

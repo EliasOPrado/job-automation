@@ -41,52 +41,58 @@
             </div>
         </div>
         <div class="jobs-list">
-            <table>
-                <tr class="table-head">
-                    <th class="table-title">Job Title</th>
-                    <th class="table-title">Date Applied</th>
-                    <th class="table-title">Email</th>
-                    <th class="table-title">Status</th>
-                    <!-- <th class="table-title">Is Favorite</th> -->
-                </tr>
-                <tbody>
-                    {% for application in page_object %}
-                        <tr class="table-row-card">
-                            <td class="table-item">{{ application.job_applied.job_title }}</td>
-                            <td class="table-item">{{ application.date_applied|date:"Y, M d-D" }}</td>
-                            <td class="table-item">{{ application.job_applied.company_email }}</td>
-                            <td class="table-item">{{ application.status }}</td>
-                            <!-- <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td> -->
-                        </tr>
-                    {% endfor %}
-                </tbody>
+            {% if count_applications > 0 %}
+                <table>
+                    <tr class="table-head">
+                        <th class="table-title">Job Title</th>
+                        <th class="table-title">Date Applied</th>
+                        <th class="table-title">Email</th>
+                        <th class="table-title">Status</th>
+                        <!-- <th class="table-title">Is Favorite</th> -->
+                    </tr>
+                    <tbody>
+                        {% for application in page_object %}
+                            <tr class="table-row-card">
+                                <td class="table-item">{{ application.job_applied.job_title }}</td>
+                                <td class="table-item">{{ application.date_applied|date:"Y, M d-D" }}</td>
+                                <td class="table-item">{{ application.job_applied.company_email }}</td>
+                                <td class="table-item">{{ application.status }}</td>
+                                <!-- <td class="table-item"><img src="{% static 'images/favorite_border.svg' %}" alt=""></td> -->
+                            </tr>
+                        {% endfor %}
+                    </tbody>
             </table>
+            {% else %}
+                <p class="sub-title message">You have no applications yet 😴</p>
+            {% endif %}
         </div>
-<!-- Pagination Controls -->
-<div class="pagination">
-    {% if page_object.has_previous %}
-       
-            <a href="?page={{ page_object.previous_page_number }}">previous</a>
-     
-    {% endif %}
+        <!-- Pagination Controls -->   
+        {% if count_applications > 0 %}
+            <div class="pagination">
+                {% if page_object.has_previous %}
+                
+                        <a href="?page={{ page_object.previous_page_number }}">previous</a>
+                
+                {% endif %}
 
-    <!-- Display page numbers -->
-    {% for num in page_object.paginator.page_range %}
-        {% if num == page_object.number %}
-            <div class="pagination-cell current">
-                <span>{{ num }}</span>  <!-- Current page -->
-            </div>
-        {% else %}
-            <div class="pagination-cell">
-                <a href="?page={{ num }}">{{ num }}</a>  <!-- Other pages -->
+                <!-- Display page numbers -->
+                {% for num in page_object.paginator.page_range %}
+                    {% if num == page_object.number %}
+                        <div class="pagination-cell current">
+                            <span>{{ num }}</span>  <!-- Current page -->
+                        </div>
+                    {% else %}
+                        <div class="pagination-cell">
+                            <a href="?page={{ num }}">{{ num }}</a>  <!-- Other pages -->
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_object.has_next %}
+                
+                        <a href="?page={{ page_object.next_page_number }}">next</a>
+            
+                {% endif %}
             </div>
         {% endif %}
-    {% endfor %}
-
-    {% if page_object.has_next %}
-      
-            <a href="?page={{ page_object.next_page_number }}">next</a>
-  
-    {% endif %}
-</div>
 {% endblock %}
