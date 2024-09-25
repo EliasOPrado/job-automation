@@ -71,7 +71,9 @@
         {% if count_applications > 0 %}
             <div class="pagination">
                 {% if page_object.has_previous %}
-                    <a href="?page={{ page_object.previous_page_number }}">Previous</a>
+                    <div class="pagination-cell">
+                        <a href="?page={{ page_object.previous_page_number }}">Previous</a>
+                    </div>
                 {% endif %}
                 <!-- Display page numbers -->
                 {% for num in page_object.paginator.page_range %}

@@ -20,6 +20,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    align-items: center;
 }
 
 .left-aside {
@@ -74,6 +75,7 @@
 .cards-container {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 .section-card {
     font-family: sans-serif;
@@ -136,6 +138,7 @@
 
 .table-container {
     border-radius: 10px;
+    width: 100%;
 }
 
 .table-title{
@@ -172,7 +175,8 @@
     height: 30px;
     color: #808080;
     text-align: left;
-    font-size: 10px;
+    letter-spacing: 0.5px;
+    font-size: 13px;
 }
 
 tbody tr.table-row-card:nth-child(odd) {
@@ -214,9 +218,10 @@ tr.table-head th:last-child {
 
 .pagination-cell.current {
     background-color: #6366F1;
-    height: 28px;
+    height: 25px;
     display: flex;
     align-items: center;
+    border-radius: 20px;
 }
 
 .pagination-cell.current span {
