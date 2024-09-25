@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0003_jobapplication_company_email'),
+        ("core", "0003_jobapplication_company_email"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='jobapplication',
-            name='location',
-            field=models.CharField(default='Remote', max_length=255),
+            model_name="jobapplication",
+            name="location",
+            field=models.CharField(default="Remote", max_length=255),
         ),
     ]

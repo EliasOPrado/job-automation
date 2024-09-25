@@ -30,7 +30,7 @@ class UltilityMethods:
 
     def extract_first_email(text):
         # Regular expression for matching an email
-        email_pattern = r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+        email_pattern = r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
         # Find all matches in the text
         emails = re.findall(email_pattern, text)
         # Return the first email if found, else return None
@@ -276,7 +276,7 @@ class DjangoJobsSearchAutomation:
     def __init__(self):
         self.options = uc.ChromeOptions()
         self.options.add_argument("--disable-blink-features=AutomationControlled")
-        self.options.add_argument("--headless")  
+        self.options.add_argument("--headless")
         self.driver = uc.Chrome(options=self.options)
 
     def scrape_djangojobs(self):
@@ -370,7 +370,9 @@ class DjangoJobsSearchAutomation:
                                 "job_title": job_title,
                                 "company_name": company_name,
                                 "job_description": job_description,
-                                "company_email": UltilityMethods.extract_first_email(job_description),
+                                "company_email": UltilityMethods.extract_first_email(
+                                    job_description
+                                ),
                             },
                         )
                         if created:
