@@ -64,12 +64,12 @@ modalButton.onclick = function() {
     overlay.style.display = "block";
 };
 
-// Close modal when clicking outside (optional)
+// Close modal when clicking on the "X" button
 closeButton.onclick = function() {
     modal.style.display = "none";
     overlay.style.display = "none";
 };
-
+// Close modal when clicking outside the modal
 overlay.onclick = function() {
     modal.style.display = "none";
     overlay.style.display = "none";

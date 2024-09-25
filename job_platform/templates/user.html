@@ -22,10 +22,10 @@
         </form>
     </div>
     <!-- Add logic wrapper here -->
-    <div class="minor-left-container">
+    <!-- <div class="minor-left-container">
         <div class="left-aside">
             <div class="user-name-and-icon">
-                <!-- <img class="user-icon" src="{% static 'images/user_avatar_icon.png'%}" alt=""> -->
+                <img class="user-icon" src="{% static 'images/user_avatar_icon.png'%}" alt="">
                 {% if user.first_name and user.last_name %}
                     <p class="sub-title">Hello {{ user.first_name }} {{ user.last_name }}</p>
                 {% else %}
@@ -47,9 +47,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="major-right-container">
         <div class="cards-container">
+            <button id="open-modal" class="section-card section">
+                <img src="{% static 'images/tool_icon.svg'%}" alt="" class="user-icons">
+                <p class="left-aside-text">Edit User Account</p>
+            </button>
             <div class="section-card today">
                 <p class="text">Jobs Applied Today</p>
                 <p class="text number">{{ applications_today }}</p>

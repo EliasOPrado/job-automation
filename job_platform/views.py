@@ -125,7 +125,7 @@ class UserPageView(View):
 
         # forms 
         application_status_form = ApplicationStatusForm()
-        custom_user_change_form = CustomUserChangeForm()
+        custom_user_change_form = CustomUserChangeForm(instance=request.user)
 
         # Remove the trailing commas
         self.context['application_status_form'] = application_status_form
@@ -138,13 +138,26 @@ class UserPageView(View):
         return render(request, self.template_name, self.context)
     
     def post(self, request):
-        application_id = request.POST.get('application_id')
-        application = get_object_or_404(Application, id=application_id, user=request.user)
+        if 'change-user-form' in request.POST:
+            form = CustomUserChangeForm(request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('user-page')
+            
+        elif 'application-form' in request.POST:
+            application_id = request.POST.get('application_id')
+            application = get_object_or_404(Application, id=application_id, user=request.user)
 
-        form = ApplicationStatusForm(request.POST, instance=application)
-        if form.is_valid():
-            form.save()
-            return redirect('user-page')
+            form = ApplicationStatusForm(request.POST, instance=application)
+            if form.is_valid():
+                form.save()
+                return redirect('user-page')
+            
+        else:
+            # Log form errors for debugging
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
 
         # If the form is not valid, you might want to render the page again
         return self.get(request)
