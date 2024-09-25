@@ -24,9 +24,9 @@ function updateNthChild() {
 
 /*
  ---- Function to increase the nth-child value ----
-*/ 
+*/
 function increaseNthChild() {
-    nthChildValue += 3; 
+    nthChildValue += 3;
     updateNthChild();
 }
 
@@ -35,21 +35,20 @@ updateNthChild();
 
 /*
  ---- Add event listener for the button to increase the nth-child value ----
-*/ 
-if (loadMoreButton){
+*/
+if (loadMoreButton) {
     loadMoreButton.addEventListener('click', increaseNthChild);
 }
 
 /*  
  --- delete message after N seconds ---
-*/ 
-setTimeout(function() {
+*/
+setTimeout(function () {
     let delete_messages = document.getElementsByClassName("message-container");
     for (let i = 0; i < delete_messages.length; i++) {
         delete_messages[i].style.display = "none"; // Hide each element
     }
 }, 3000);
-
 
 /*
  ---- Modal/Pop-Up Functionality ----
@@ -59,18 +58,18 @@ let overlay = document.getElementById("overlay");
 let modalButton = document.getElementById("open-modal");
 let closeButton = document.getElementById("close-modal");
 
-modalButton.onclick = function() {
+modalButton.onclick = function () {
     modal.style.display = "flex";
     overlay.style.display = "block";
 };
 
 // Close modal when clicking on the "X" button
-closeButton.onclick = function() {
+closeButton.onclick = function () {
     modal.style.display = "none";
     overlay.style.display = "none";
 };
 // Close modal when clicking outside the modal
-overlay.onclick = function() {
+overlay.onclick = function () {
     modal.style.display = "none";
     overlay.style.display = "none";
 };
