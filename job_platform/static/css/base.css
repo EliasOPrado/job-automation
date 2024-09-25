@@ -69,6 +69,10 @@ button.main-button {
   border-radius: 10px;
 }
 
+.message-container.sign {
+  font-size: 10px;
+}
+
 .logo {
   display: flex;
   align-items: center;

@@ -10,13 +10,11 @@
       <a href="{% url 'job-list-page' %}"><p class="text">Jobs</p></a>
       <p class="text">About</p>
       <a href="{% url 'signin-page' %}"><p class="text">Sign In</p></a>
-      <button class="button">Sign Up Now</button>
+      <a href="{% url 'signup-page' %}"><button class="button">Sign Up Now</button></a>
     </div>
   </div>
-  {% if page != 'sigup' or page != 'signin'%}
-    {% if messages %}
-      {% for message in messages %}
-          <p class="message-container">{{message}}</p>
-      {% endfor %}
-    {% endif %}
+  {% if messages %}
+    {% for message in messages %}
+        <p class="message-container">{{message}}</p>
+    {% endfor %}
   {% endif %}

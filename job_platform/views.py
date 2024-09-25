@@ -7,6 +7,8 @@ from django.views import View
 from .forms import ApplicationStatusForm
 from core.models import JobApplication, Application
 from .forms import CustomUserCreationForm
+from .forms import CustomAuthenticationForm
+from django.contrib.auth import logout, login
 
 # Create your views here.
 class HomeView(View):
@@ -44,8 +46,33 @@ class SignInView(View):
             'page':'signin',
             'css_file':'sign_page.css'
             }
+
         def get(self, request):
+            form = CustomAuthenticationForm()
+            self.context['form'] = form
             return render(request, self.template_name, self.context)
+        
+        def post(self, request):
+            form = CustomAuthenticationForm(request, data=request.POST)  # Pass request explicitly here
+            self.context['form'] = form
+
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                return redirect('user-page')
+            else:
+                # Log form errors for debugging
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{field}: {error}")
+
+            return render(request, self.template_name, self.context)
+        
+class SignOutView(View):
+    def get(self, request):
+        logout(request)
+        messages.error(request, "You are logged out!")
+        return redirect('signin-page')
 
 class JobListView(View):
         template_name = 'job_list.html'
