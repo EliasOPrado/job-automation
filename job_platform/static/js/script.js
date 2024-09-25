@@ -1,5 +1,7 @@
 
-// Load more functionality
+/* 
+ ---- Load more functionality ----
+*/
 let cardContainer = document.getElementsByClassName("minor-left-container");
 let loadMoreButton = document.getElementById("load-more-button");
 let allCards = document.querySelectorAll("job-list-card");
@@ -20,7 +22,9 @@ function updateNthChild() {
     `;
 }
 
-// Function to increase the nth-child value
+/*
+ ---- Function to increase the nth-child value ----
+*/ 
 function increaseNthChild() {
     nthChildValue += 3; 
     updateNthChild();
@@ -29,14 +33,44 @@ function increaseNthChild() {
 
 updateNthChild();
 
-// Add event listener for the button to increase the nth-child value
-loadMoreButton.addEventListener('click', increaseNthChild);
+/*
+ ---- Add event listener for the button to increase the nth-child value ----
+*/ 
+if (loadMoreButton){
+    loadMoreButton.addEventListener('click', increaseNthChild);
+}
 
-
-// delete message
+/*  
+ --- delete message after N seconds ---
+*/ 
 setTimeout(function() {
     let delete_messages = document.getElementsByClassName("message-container");
     for (let i = 0; i < delete_messages.length; i++) {
         delete_messages[i].style.display = "none"; // Hide each element
     }
 }, 3000);
+
+
+/*
+ ---- Modal/Pop-Up Functionality ----
+*/
+let modal = document.getElementById("modal");
+let overlay = document.getElementById("overlay");
+let modalButton = document.getElementById("open-modal");
+let closeButton = document.getElementById("close-modal");
+
+modalButton.onclick = function() {
+    modal.style.display = "flex";
+    overlay.style.display = "block";
+};
+
+// Close modal when clicking outside (optional)
+closeButton.onclick = function() {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+};
+
+overlay.onclick = function() {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+};

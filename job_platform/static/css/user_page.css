@@ -12,14 +12,14 @@
 .minor-left-container {
     display: flex;
     flex-direction: column;
-    width: 25%;
+    width: 20%;
     margin: 10px;
 }
 
 .major-right-container {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 80%;
     margin: 10px;
 }
 
@@ -74,6 +74,7 @@
 }
 .cards-container {
     display: flex;
+    justify-content: space-between;
 }
 .section-card {
     font-family: sans-serif;
@@ -125,16 +126,8 @@
     margin-top: 10px;
 }
 
-.jobs-list {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #cecece;
+.table-container {
     border-radius: 10px;
-    height: 60vh;
-    padding: 5px;
 }
 
 .table-title{
@@ -144,6 +137,18 @@
     color: white;
     text-align: left;
     padding: 0 10px 0 10px;
+}
+
+.jobs-message-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #cecece;
+    border-radius: 10px;
+    height: 65vh;
+    padding: 5px;
 }
 
 /* tr.table-row-card td {
@@ -163,7 +168,7 @@
 }
 
 tbody tr.table-row-card:nth-child(odd) {
-    background-color:#f2f1f1;
+    background-color:#f4f4f4;
 }
 
 tbody tr.table-row-card:nth-child(even) {
@@ -171,7 +176,7 @@ tbody tr.table-row-card:nth-child(even) {
 }
 
 tr.table-head{
-    background-color: #808080;
+    background-color: #007AFF;
 }
 tr.table-head th:first-child {
     border-top-left-radius: 5px; /* Apply to the first <th> */
@@ -189,7 +194,7 @@ tr.table-head th:last-child {
     border-color: #cecece;
     border-radius: 10px;
     background-color: white;
-    height: 40px;
+    height: 29px;
     padding: 0 10px 0 10px;
     margin-top: 10px;
     width: fit-content;
@@ -201,8 +206,23 @@ tr.table-head th:last-child {
 
 .pagination-cell.current {
     background-color: #6366F1;
-    color: white;
-    height: 39px;
+    height: 28px;
     display: flex;
     align-items: center;
+}
+
+.pagination-cell.current span {
+    color: white;
+}
+
+.pagination-cell a, .pagination-cell span {
+    font-size: 13px;
+    color: #cecece;
+}
+
+.form-container.change-user {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
 }

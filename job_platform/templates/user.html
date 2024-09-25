@@ -3,17 +3,40 @@
 
 {% block content %}
 <div class="main-container">
+    <!-- Add logic wrapper here -->
+    <div id="overlay" class="overlay"></div>
+    <div id="modal" class="user-modal-container">
+        <form method="post" class="form-container change-user">
+            {% csrf_token %}
+            <div class="form-title">
+                Update Your Data
+                <span id="close-modal" class="close-modal-button">
+                    x
+                </span>
+            </div>
+            {{ custom_user_change_form.username }}
+            {{ custom_user_change_form.email }}
+            {{ custom_user_change_form.first_name }}
+            {{ custom_user_change_form.last_name }}
+            <button class="form-button" name="change-user-form">Change My User Data</button>
+        </form>
+    </div>
+    <!-- Add logic wrapper here -->
     <div class="minor-left-container">
         <div class="left-aside">
             <div class="user-name-and-icon">
                 <!-- <img class="user-icon" src="{% static 'images/user_avatar_icon.png'%}" alt=""> -->
-                <p class="sub-title">Hello John Doe</p>
+                {% if user.first_name and user.last_name %}
+                    <p class="sub-title">Hello {{ user.first_name }} {{ user.last_name }}</p>
+                {% else %}
+                    <p class="sub-title">Hello {{ user.username}}</p>
+                {% endif %}
             </div>
             <div class="user-utils-section">
-                <div class="section">
+                <button id="open-modal" class="section">
                     <img src="{% static 'images/tool_icon.svg'%}" alt="" class="user-icons">
                     <p class="left-aside-text">Edit User Account</p>
-                </div>
+                </button>
                 <div class="section">
                     <img src="{% static 'images/download_icon.svg'%}" alt="" class="user-icons">
                     <p class="left-aside-text">Download Applications</p>
@@ -40,9 +63,9 @@
                 <p class="text  number">{{ applications_this_month }}</p>
             </div>
         </div>
-        <div class="jobs-list">
+        
             {% if count_applications > 0 %}
-                <table>
+                <table class="table-container">
                     <tr class="table-head">
                         <th class="table-title">Job Title</th>
                         <th class="table-title">Date Applied</th>
@@ -63,18 +86,16 @@
                     </tbody>
             </table>
             {% else %}
-                <p class="sub-title message">You have no applications yet 😴</p>
+                <div class="jobs-message-container">
+                    <p class="sub-title message">You have no applications yet 😴</p>
+                </div>
             {% endif %}
-        </div>
         <!-- Pagination Controls -->   
         {% if count_applications > 0 %}
             <div class="pagination">
                 {% if page_object.has_previous %}
-                
-                        <a href="?page={{ page_object.previous_page_number }}">previous</a>
-                
+                    <a href="?page={{ page_object.previous_page_number }}">Previous</a>
                 {% endif %}
-
                 <!-- Display page numbers -->
                 {% for num in page_object.paginator.page_range %}
                     {% if num == page_object.number %}
@@ -89,9 +110,9 @@
                 {% endfor %}
 
                 {% if page_object.has_next %}
-                
-                        <a href="?page={{ page_object.next_page_number }}">next</a>
-            
+                    <div class="pagination-cell">
+                        <a href="?page={{ page_object.next_page_number }}">Next</a>
+                    </div>
                 {% endif %}
             </div>
         {% endif %}

@@ -8,6 +8,7 @@ from .forms import ApplicationStatusForm
 from core.models import JobApplication, Application
 from .forms import CustomUserCreationForm
 from .forms import CustomAuthenticationForm
+from .forms import CustomUserChangeForm
 from django.contrib.auth import logout, login
 
 # Create your views here.
@@ -122,7 +123,13 @@ class UserPageView(View):
         applications_this_week = Application.objects.filter(date_applied__date__gte=start_of_week, user=request.user).count()
         applications_this_month = Application.objects.filter(date_applied__date__gte=start_of_month, user=request.user).count()
 
+        # forms 
+        application_status_form = ApplicationStatusForm()
+        custom_user_change_form = CustomUserChangeForm()
+
         # Remove the trailing commas
+        self.context['application_status_form'] = application_status_form
+        self.context['custom_user_change_form'] = custom_user_change_form
         self.context['count_applications'] = applications.count()
         self.context['applications_today'] = applications_today
         self.context['applications_this_week'] = applications_this_week
